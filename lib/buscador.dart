@@ -1,3 +1,4 @@
+import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class VistaBuscador extends StatefulWidget {
@@ -13,16 +14,7 @@ class _VistaBuscadorState extends State<VistaBuscador> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Buscador"),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.apps_outlined),
-          ),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.person))
-        ],
-      ),
+      appBar: BaseAppBar(title: const Text('Buscador'), appBar: AppBar()),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
         child: Column(
