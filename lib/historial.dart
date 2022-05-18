@@ -24,7 +24,135 @@ class _VistaHistorialState extends State<VistaHistorial> {
                 Radius.circular(15),
               ),
               color: Colors.grey),
-          child: Column(children: []),
+          child: Column(children: [
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: 20,
+              color: Colors.grey[700],
+              child: const SizedBox.expand(
+                child: Center(
+                  child: Text("Reservas activas"),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ),
+                    color: Colors.grey),
+                child: ListView.builder(
+                  itemCount: 2,
+                  primary: false,
+                  itemBuilder: (context, i) {
+                    return SizedBox(
+                      height: 150,
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 33,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image.network(
+                                  'https://picsum.photos/250?image=9',
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 66,
+                              child: Stack(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Column(
+                                      children: const [
+                                        Text("Titulo del libro"),
+                                        Text("Descripión del libro"),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            primary: Colors.red,
+                                          ),
+                                          onPressed: () {},
+                                          child: const Text("Cancelar")),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+            Container(
+              height: 20,
+              color: Colors.grey[700],
+              child: const SizedBox.expand(
+                child: Center(
+                  child: Text("Historial de reservas"),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Container(
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ),
+                    color: Colors.grey),
+                child: ListView.builder(
+                  itemCount: 5,
+                  itemBuilder: (context, i) {
+                    return SizedBox(
+                      height: 150,
+                      child: Card(
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 33,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image.network(
+                                  'https://picsum.photos/250?image=9',
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 66,
+                              child: Column(
+                                children: const [
+                                  Text("Titulo del libro"),
+                                  Text("Descripión del libro")
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ]),
         ),
       ),
     );
