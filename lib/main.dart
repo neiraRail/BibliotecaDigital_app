@@ -1,5 +1,7 @@
 import 'package:bib_digitalapp/buscador.dart';
+import 'package:bib_digitalapp/datos_libros.dart';
 import 'package:bib_digitalapp/historial.dart';
+import 'package:bib_digitalapp/login.dart';
 import 'package:bib_digitalapp/qr_reserva.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      home: const VistaReservaQR(),
+      home: const VistaLogin(),
     );
   }
 }
