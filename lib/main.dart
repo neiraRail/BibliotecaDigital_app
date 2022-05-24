@@ -1,5 +1,6 @@
 import 'package:bib_digitalapp/buscador.dart';
 import 'package:bib_digitalapp/historial.dart';
+import 'package:bib_digitalapp/web/buscador.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      home: const VistaHistorial(),
+      home: const buscadorWeb(),
     );
   }
 }
