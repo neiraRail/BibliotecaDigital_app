@@ -1,4 +1,5 @@
 import 'package:bib_digitalapp/base_app_bar.dart';
+import 'package:bib_digitalapp/libro_card.dart';
 import 'package:flutter/material.dart';
 
 class VistaReservaQR extends StatefulWidget {
@@ -13,7 +14,7 @@ class _VistaReservaQRState extends State<VistaReservaQR> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        title: const Text("Historial"),
+        title: const Text("QR Resera"),
         appBar: AppBar(),
       ),
       body: Padding(
@@ -41,31 +42,7 @@ Reserva realizada exitosamente''',
                 ),
               ),
               const Text("Hora máxima para retirar libro"),
-              SizedBox(
-                height: 150,
-                child: Card(
-                  color: Colors.transparent,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 33,
-                        child: Image.network(
-                          'https://picsum.photos/200',
-                        ),
-                      ),
-                      Expanded(
-                        flex: 66,
-                        child: Column(
-                          children: const [
-                            Text("Titulo del libro"),
-                            Text("Descripión del libro")
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              const LibroCard(),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.red,

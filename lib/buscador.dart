@@ -1,4 +1,5 @@
 import 'package:bib_digitalapp/base_app_bar.dart';
+import 'package:bib_digitalapp/libro_card.dart';
 import 'package:flutter/material.dart';
 
 class VistaBuscador extends StatefulWidget {
@@ -71,31 +72,7 @@ class _VistaBuscadorState extends State<VistaBuscador> {
                 child: ListView.builder(
                   itemCount: 5,
                   itemBuilder: (context, i) {
-                    return Container(
-                      height: 150,
-                      child: Card(
-                        color: Colors.transparent,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 33,
-                              child: Image.network(
-                                'https://picsum.photos/250?image=9',
-                              ),
-                            ),
-                            Expanded(
-                              flex: 66,
-                              child: Column(
-                                children: const [
-                                  Text("Titulo del libro"),
-                                  Text("Descripión del libro")
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
+                    return const LibroCard();
                   },
                 ),
               ),
