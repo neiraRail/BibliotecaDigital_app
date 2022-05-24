@@ -2,6 +2,7 @@ import 'package:bib_digitalapp/buscador.dart';
 import 'package:bib_digitalapp/datos_libros.dart';
 import 'package:bib_digitalapp/historial.dart';
 import 'package:bib_digitalapp/login.dart';
+import 'package:bib_digitalapp/navegador.dart';
 import 'package:bib_digitalapp/qr_lector.dart';
 import 'package:bib_digitalapp/qr_reserva.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,16 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      home: const VistaLectorQR(),
+      initialRoute: 'login',
+      routes: {
+        'buscador': (context) => const VistaBuscador(),
+        'navegador': ((context) => const VistaNavegador()),
+        'historial': ((context) => const VistaHistorial()),
+        'lector': (context) => const VistaLectorQR(),
+        'login': (context) => const VistaLogin(),
+        'datos': (context) => const VistaDatosLibros(),
+        'reserva': (context) => const VistaReservaQR(),
+      },
     );
   }
 }
