@@ -33,6 +33,9 @@ class _buscadorWebState extends State<buscadorWeb> {
                 )
               ],
             ),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               children: [
                 //aqui voy a poner filtros
@@ -42,7 +45,7 @@ class _buscadorWebState extends State<buscadorWeb> {
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(15),
                 ),
-                color: Colors.grey
+                color: Colors.deepPurple
               ),
               child: GridView.builder(
                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -6,6 +6,7 @@ import 'package:bib_digitalapp/navegador.dart';
 import 'package:bib_digitalapp/qr_lector.dart';
 import 'package:bib_digitalapp/qr_reserva.dart';
 import 'package:bib_digitalapp/web/buscador.dart';
+import 'package:bib_digitalapp/web/subida_manual.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
         'login': (context) => const VistaLogin(),
         'datos': (context) => const VistaDatosLibros(),
         'reserva': (context) => const VistaReservaQR(),
-        'buscadorweb': (context) => const buscadorWeb(),
+        'buscadorWeb': ((context) => const buscadorWeb()),
+        'subidaManual': ((context) => const subidaManual()),
       },
     );
   }
