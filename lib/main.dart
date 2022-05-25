@@ -5,6 +5,7 @@ import 'package:bib_digitalapp/login.dart';
 import 'package:bib_digitalapp/navegador.dart';
 import 'package:bib_digitalapp/qr_lector.dart';
 import 'package:bib_digitalapp/qr_reserva.dart';
+import 'package:bib_digitalapp/web/carga_libros.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      initialRoute: 'login',
+      initialRoute: 'carga',
       routes: {
         'buscador': (context) => const VistaBuscador(),
         'navegador': ((context) => const VistaNavegador()),
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         'login': (context) => const VistaLogin(),
         'datos': (context) => const VistaDatosLibros(),
         'reserva': (context) => const VistaReservaQR(),
+        'carga': (context) => const CargaLibros(),
       },
     );
   }
