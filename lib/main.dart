@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
         'login': (context) => const VistaLogin(),
         'datos': (context) => const VistaDatosLibros(),
         'reserva': (context) => const VistaReservaQR(),
+        'buscadorweb': (context) => const buscadorWeb(),
       },
     );
   }

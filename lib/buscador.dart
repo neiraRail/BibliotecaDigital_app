@@ -1,6 +1,7 @@
 import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:bib_digitalapp/libro_card.dart';
 import 'package:flutter/material.dart';
+import 'package:bib_digitalapp/libro_card.dart';
 
 class VistaBuscador extends StatefulWidget {
   const VistaBuscador({Key? key}) : super(key: key);

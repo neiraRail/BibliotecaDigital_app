@@ -1,3 +1,4 @@
+import 'package:bib_digitalapp/libro_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -53,24 +54,7 @@ class _buscadorWebState extends State<buscadorWeb> {
                 itemCount: 10,
                 
                 itemBuilder: (context,i){
-                  return Container(
-                    height: 150,
-                    child: Card(
-                      color: Colors.brown,
-                      child: Row(
-                        children: [
-                          Expanded(child: Image.network( 'https://picsum.photos/250?image=9',)
-                          ),
-                          Expanded(child: Column(
-                            children: const[
-                              Text('texto texto'),
-                              Text('Hola hola hola texto')
-                             ],
-                          ))
-                        ],
-                      ),
-                    ),
-                  );
+                  return const LibroCard();
                 }
             )
             )
