@@ -5,10 +5,13 @@ import 'package:bib_digitalapp/login.dart';
 import 'package:bib_digitalapp/navegador.dart';
 import 'package:bib_digitalapp/qr_lector.dart';
 import 'package:bib_digitalapp/qr_reserva.dart';
+
 import 'package:bib_digitalapp/web/buscador.dart';
 import 'package:bib_digitalapp/web/editar.dart';
 import 'package:bib_digitalapp/web/historialWeb.dart';
 import 'package:bib_digitalapp/web/subida_manual.dart';
+import 'package:bib_digitalapp/web/carga_libros.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -35,8 +38,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      home: const buscadorWeb(),
-      initialRoute: 'login',
+      initialRoute: 'carga',
       routes: {
         'buscador': (context) => const VistaBuscador(),
         'navegador': ((context) => const VistaNavegador()),
@@ -49,7 +51,7 @@ class MyApp extends StatelessWidget {
         'subidaManual': ((context) => const subidaManual()),
         'editar': ((context) => const editar()),
         'historialWeb': ((context) => const historialWeb()),
-
+        'carga': (context) => const CargaLibros(),
       },
     );
   }
