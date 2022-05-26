@@ -69,7 +69,40 @@ class _subidaManualState extends State<subidaManual> {
                 )
 
               ],
+              
             ),
+            SizedBox(height: 30),
+            Row(
+              children: [
+                const Text('Categoría: '),
+                SizedBox( width: 30),
+                Expanded(
+                  child: const TextField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                    
+                    ),
+                  ),
+
+                ),
+                SizedBox( width: 30),
+                const Text('Año:'),
+                SizedBox( width: 30),
+                Expanded(
+                  child: const TextField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                    
+                    ),
+                  ),
+
+                ),
+
+              ],
+            ),
+            
             SizedBox(height: 20),
             Align(
               alignment:  Alignment.centerRight,
