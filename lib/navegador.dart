@@ -2,6 +2,7 @@ import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:bib_digitalapp/buscador.dart';
 import 'package:bib_digitalapp/historial.dart';
 import 'package:bib_digitalapp/web/buscador.dart';
+import 'package:bib_digitalapp/web/historialWeb.dart';
 import 'package:bib_digitalapp/web/subida_manual.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,9 @@ class _VistaNavegadorState extends State<VistaNavegador> {
       {'icon': Icons.e_mobiledata, 'route': 'lector'},
       {'icon': Icons.face, 'route': 'login'},
       {'icon': Icons.account_circle, 'route': 'buscadorWeb'},
-      {'icon': Icons.account_balance_wallet, 'route': 'subidaManual'}
+      {'icon': Icons.cruelty_free, 'route': 'subidaManual'},
+      {'icon': Icons.emoji_nature , 'route': 'editar'},
+      {'icon': Icons.note, 'route': 'historialWeb'}
     ];
     super.initState();
   }
