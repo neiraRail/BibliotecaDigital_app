@@ -13,6 +13,8 @@ class VistaBuscador extends StatefulWidget {
 class _VistaBuscadorState extends State<VistaBuscador> {
   bool filtro1 = false;
   bool filtro2 = false;
+
+  List<Map> busqueda = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +58,10 @@ class _VistaBuscadorState extends State<VistaBuscador> {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.green,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  busqueda = buscarPalabra("str");
+                  setState(() {});
+                },
                 child: const Text("Verde"),
               ),
             ),
@@ -71,7 +76,7 @@ class _VistaBuscadorState extends State<VistaBuscador> {
                     ),
                     color: Colors.grey),
                 child: ListView.builder(
-                  itemCount: 5,
+                  itemCount: busqueda.length,
                   itemBuilder: (context, i) {
                     return const LibroCard();
                   },
@@ -82,5 +87,9 @@ class _VistaBuscadorState extends State<VistaBuscador> {
         ),
       ),
     );
+  }
+
+  List<Map> buscarPalabra(palabra) {
+    return [{}];
   }
 }
