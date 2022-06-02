@@ -25,7 +25,11 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           icon: const Icon(Icons.apps_outlined),
         ),
-        IconButton(onPressed: () {}, icon: const Icon(Icons.person))
+        IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, 'perfil');
+            },
+            icon: const Icon(Icons.person))
       ],
     );
   }
