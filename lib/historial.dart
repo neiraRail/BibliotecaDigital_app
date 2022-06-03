@@ -1,5 +1,6 @@
 import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:bib_digitalapp/libro_card.dart';
+import 'package:bib_digitalapp/modelo/libro.dart';
 import 'package:flutter/material.dart';
 
 class VistaHistorial extends StatefulWidget {
@@ -51,6 +52,7 @@ class _VistaHistorialState extends State<VistaHistorial> {
                   primary: false,
                   itemBuilder: (context, i) {
                     return LibroCard(
+                      libro: Libro(),
                       boton: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             primary: Colors.red,
@@ -82,7 +84,9 @@ class _VistaHistorialState extends State<VistaHistorial> {
                 child: ListView.builder(
                   itemCount: 5,
                   itemBuilder: (context, i) {
-                    return const LibroCard();
+                    return LibroCard(
+                      libro: Libro(),
+                    );
                   },
                 ),
               ),

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'modelo/libro.dart';
+
 class LibroCard extends StatefulWidget {
   final Widget? boton;
+  Libro libro;
 
-  const LibroCard({Key? key, this.boton}) : super(key: key);
+  LibroCard({Key? key, this.boton, required this.libro}) : super(key: key);
 
   @override
   State<LibroCard> createState() => _LibroCardState();
@@ -34,9 +37,12 @@ class _LibroCardState extends State<LibroCard> {
                   Align(
                     alignment: Alignment.center,
                     child: Column(
-                      children: const [
-                        Text("Titulo del libro"),
-                        Text("Descripión del libro"),
+                      children: [
+                        Text(widget.libro.idLibro.toString()),
+                        Text(widget.libro.titulo),
+                        Text(widget.libro.autor),
+                        Text(widget.libro.ano.toString()),
+                        Text(widget.libro.editorial),
                       ],
                     ),
                   ),

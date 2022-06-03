@@ -4,6 +4,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:bib_digitalapp/base_app_bar.dart';
 
+import '../modelo/libro.dart';
+
 class buscadorWeb extends StatefulWidget {
   const buscadorWeb({Key? key}) : super(key: key);
 
@@ -55,7 +57,9 @@ class _buscadorWebState extends State<buscadorWeb> {
                       ),
                       itemCount: busqueda.length,
                       itemBuilder: (context, i) {
-                        return const LibroCard();
+                        return LibroCard(
+                          libro: Libro(),
+                        );
                       })))
         ]),
       ),

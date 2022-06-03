@@ -1,5 +1,6 @@
 import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:bib_digitalapp/libro_card.dart';
+import 'package:bib_digitalapp/modelo/libro.dart';
 import 'package:flutter/material.dart';
 
 class VistaReservaQR extends StatefulWidget {
@@ -42,7 +43,9 @@ Reserva realizada exitosamente''',
                 ),
               ),
               const Text("Hora máxima para retirar libro"),
-              const LibroCard(),
+              LibroCard(
+                libro: Libro(),
+              ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.red,
