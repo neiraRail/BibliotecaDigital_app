@@ -58,7 +58,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                       alignment: Alignment.bottomCenter,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.green),
-                        onPressed: () {},
+                        onPressed:() => Navigator.pushNamed(context, 'reserva'),
                         child: const Text("RESERVA"),
                       ),
                     ),

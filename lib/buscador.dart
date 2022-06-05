@@ -73,7 +73,11 @@ class _VistaBuscadorState extends State<VistaBuscador> {
                 child: ListView.builder(
                   itemCount: 5,
                   itemBuilder: (context, i) {
-                    return const LibroCard();
+                    return 
+                    GestureDetector(
+                      onTap:() => Navigator.pushNamed(context, 'datos'),
+                      child: const LibroCard(),
+                    );
                   },
                 ),
               ),

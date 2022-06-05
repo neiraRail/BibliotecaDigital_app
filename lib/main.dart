@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      initialRoute: 'carga',
+      initialRoute: 'login',
       routes: {
         'buscador': (context) => const VistaBuscador(),
         'navegador': ((context) => const VistaNavegador()),
@@ -47,10 +47,10 @@ class MyApp extends StatelessWidget {
         'login': (context) => const VistaLogin(),
         'datos': (context) => const VistaDatosLibros(),
         'reserva': (context) => const VistaReservaQR(),
-        'buscadorWeb': ((context) => const buscadorWeb()),
-        'subidaManual': ((context) => const subidaManual()),
-        'editar': ((context) => const editar()),
-        'historialWeb': ((context) => const historialWeb()),
+        'buscadorWeb': (context) => const BuscadorWeb(),
+        'subidaManual': (context) => const subidaManual(),
+        'editar':(context) => const editar(),
+        'historialWeb': (context) => const historialWeb(),
         'carga': (context) => const CargaLibros(),
       },
     );
