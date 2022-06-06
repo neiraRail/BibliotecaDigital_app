@@ -49,10 +49,11 @@ class MyApp extends StatelessWidget {
         'datos': (context) => const VistaDatosLibros(),
         'reserva': (context) => const VistaReservaQR(),
         'perfil': (context) => const VistaPerfil(),
-        'buscadorWeb': ((context) => const buscadorWeb()),
+        'buscadorWeb': ((context) => const BuscadorWeb()),
         'subidaManual': ((context) => const subidaManual()),
         'editar': ((context) => const editar()),
         'historialWeb': ((context) => const historialWeb()),
+        
         'carga': (context) => const CargaLibros(),
       },
     );

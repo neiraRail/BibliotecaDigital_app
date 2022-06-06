@@ -50,7 +50,7 @@ Reserva realizada exitosamente''',
                 style: ElevatedButton.styleFrom(
                   primary: Colors.red,
                 ),
-                onPressed: () {},
+                onPressed: () => Navigator.pushNamed(context, 'buscador'),
                 child: const Text("Cancelar"),
               )
             ],

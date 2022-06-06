@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:bib_digitalapp/base_app_bar.dart';
+import 'package:flutter/widgets.dart';
 
 import '../modelo/libro.dart';
 
-class buscadorWeb extends StatefulWidget {
-  const buscadorWeb({Key? key}) : super(key: key);
+class BuscadorWeb extends StatefulWidget {
+  const BuscadorWeb({Key? key}) : super(key: key);
 
   @override
-  State<buscadorWeb> createState() => _buscadorWebState();
+  State<BuscadorWeb> createState() => _BuscadorWebState();
 }
 
-class _buscadorWebState extends State<buscadorWeb> {
+class _BuscadorWebState extends State<BuscadorWeb> {
   List<Map> busqueda = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,8 +57,10 @@ class _buscadorWebState extends State<buscadorWeb> {
                       ),
                       itemCount: busqueda.length,
                       itemBuilder: (context, i) {
-                        return LibroCard(
-                          libro: Libro(),
+                        return  GestureDetector(
+                          onTap: () =>Navigator.pushNamed(context, 'datos'),
+                          child: LibroCard(libro: Libro())
+                    
                         );
                       })))
         ]),
