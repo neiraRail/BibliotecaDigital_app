@@ -26,7 +26,7 @@ class Libro {
   factory Libro.fromJson(dynamic json) {
     return Libro(
       idLibro: json['idLibro'],
-      titulo: json['nombre'],
+      titulo: json['titulo'],
       autor: json['autor'],
       ano: json['ano'],
       editorial: json['editorial'],
