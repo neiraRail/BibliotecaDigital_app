@@ -1,6 +1,8 @@
 import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:flutter/material.dart';
 
+import 'modelo/libro.dart';
+
 class VistaDatosLibros extends StatefulWidget {
   const VistaDatosLibros({Key? key}) : super(key: key);
 
@@ -11,6 +13,7 @@ class VistaDatosLibros extends StatefulWidget {
 class _VistaDatosLibrosState extends State<VistaDatosLibros> {
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Libro;
     return Scaffold(
         appBar: BaseAppBar(
           title: const Text("Datos Libro"),
@@ -34,12 +37,13 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                         children: [
                           Image.network(
                             'https://picsum.photos/250?image=9',
+                            width: 200,
                           ),
                           const SizedBox(
                             width: 10,
                           ),
-                          const Text(
-                            "Titulo Del Libro",
+                          Text(
+                            args.titulo,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           )
                         ],
@@ -47,9 +51,26 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Center(
-                          child: Text(
-                              "Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción")),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Autor: " + args.autor),
+                            Text(
+                              "Editorial: " + args.editorial,
+                            ),
+                            Text(
+                              "Año: " + args.ano.toString(),
+                            ),
+                            Text("Resumen: " + args.resumen),
+                            Text("otroTitulo: " + args.otroTitulo),
+                            Text("cdd: " + args.cdd),
+                            Text("isbn: " + args.isbn),
+                            Text("tipoMaterial: " + args.tipoMaterial),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                   Padding(
@@ -58,7 +79,8 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                       alignment: Alignment.bottomCenter,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.green),
-                        onPressed:() => Navigator.pushNamed(context, 'reserva'),
+                        onPressed: () =>
+                            Navigator.pushNamed(context, 'reserva'),
                         child: const Text("RESERVA"),
                       ),
                     ),
