@@ -2,6 +2,9 @@ import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:bib_digitalapp/libro_card.dart';
 import 'package:bib_digitalapp/modelo/libro.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+
+import 'package:http/http.dart' as http;
 
 class VistaReservaQR extends StatefulWidget {
   const VistaReservaQR({Key? key}) : super(key: key);
@@ -15,7 +18,7 @@ class _VistaReservaQRState extends State<VistaReservaQR> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        title: const Text("QR Resera"),
+        title: const Text("QR Reserva"),
         appBar: AppBar(),
       ),
       body: Padding(
@@ -37,9 +40,10 @@ Reserva realizada exitosamente''',
                 flex: 33,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Image.network(
-                    'https://picsum.photos/201',
-                  ),
+                  child: QrImage(
+                    data: 'idReserva: 1',
+                    version: QrVersions.auto,
+                    size: 320),
                 ),
               ),
               const Text("Hora máxima para retirar libro"),
