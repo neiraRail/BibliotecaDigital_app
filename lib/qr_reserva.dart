@@ -14,8 +14,11 @@ class VistaReservaQR extends StatefulWidget {
 }
 
 class _VistaReservaQRState extends State<VistaReservaQR> {
+  
   @override
   Widget build(BuildContext context) {
+     final args = ModalRoute.of(context)!.settings.arguments as Libro;
+     String horaMax = "18:00:00";
     return Scaffold(
       appBar: BaseAppBar(
         title: const Text("QR Reserva"),
@@ -46,9 +49,11 @@ Reserva realizada exitosamente''',
                     size: 280),
                 ),
               ),
-              const Text("Hora máxima para retirar libro"),
+              const Text("Hora máxima para retirar libro: "),
+              Text(horaMax),
+
               LibroCard(
-                libro: Libro(),
+                libro: args,
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(

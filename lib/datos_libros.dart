@@ -162,7 +162,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                               return GestureDetector(
                                                 onTap: (() => Navigator
                                                     .pushReplacementNamed(
-                                                        context, 'reserva')),
+                                                        context, 'reserva', arguments: args)),
                                                 child: ListTile(
                                                     title: Text("copia " +
                                                         copias[i]
