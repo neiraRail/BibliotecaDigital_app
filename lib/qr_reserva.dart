@@ -43,7 +43,7 @@ Reserva realizada exitosamente''',
                   child: QrImage(
                     data: 'idReserva: 1',
                     version: QrVersions.auto,
-                    size: 320),
+                    size: 280),
                 ),
               ),
               const Text("Hora máxima para retirar libro"),
