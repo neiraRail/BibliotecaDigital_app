@@ -20,14 +20,13 @@ class _VistaNavegadorState extends State<VistaNavegador> {
   void initState() {
     programmeList = [
       {'icon': Icons.abc, 'route': 'buscador'},
-      {'icon': Icons.baby_changing_station, 'route': 'datos'},
       {'icon': Icons.cabin, 'route': 'historial'},
       {'icon': Icons.dangerous, 'route': 'reserva'},
       {'icon': Icons.e_mobiledata, 'route': 'lector'},
       {'icon': Icons.face, 'route': 'login'},
       {'icon': Icons.account_circle, 'route': 'buscadorWeb'},
       {'icon': Icons.cruelty_free, 'route': 'subidaManual'},
-      {'icon': Icons.emoji_nature , 'route': 'editar'},
+      {'icon': Icons.emoji_nature, 'route': 'editar'},
       {'icon': Icons.note, 'route': 'historialWeb'}
     ];
     super.initState();

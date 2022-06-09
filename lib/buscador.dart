@@ -99,10 +99,10 @@ class _VistaBuscadorState extends State<VistaBuscador> {
                 child: ListView.builder(
                   itemCount: busqueda.length,
                   itemBuilder: (context, i) {
-                    return 
-                    GestureDetector(
-                      onTap:() => Navigator.pushNamed(context, 'datos'),
-                      child: LibroCard( libro: busqueda[i]),
+                    return GestureDetector(
+                      onTap: () => Navigator.pushNamed(context, 'datos',
+                          arguments: busqueda[i]),
+                      child: LibroCard(libro: busqueda[i]),
                     );
                   },
                 ),
@@ -116,7 +116,7 @@ class _VistaBuscadorState extends State<VistaBuscador> {
 
   Future<List<Libro>> buscarPalabra(palabra) async {
     final response = await http.get(
-        Uri.http("200.13.5.14:7102", "/libro/" + palabra, {'q': '{http}'}));
+        Uri.http("200.13.5.14:7102", "/busqueda/" + palabra, {'q': '{http}'}));
 
     if (response.statusCode == 200) {
       Iterable l = json.decode(response.body);
