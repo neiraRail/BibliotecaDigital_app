@@ -80,8 +80,8 @@ class _BuscadorWebState extends State<BuscadorWeb> {
   }
 
   Future<List<Libro>> buscarPalabra(palabra) async {
-    final response = await http.get(
-        Uri.http("200.13.5.14:7102", "/busqueda/" + palabra, {'q': '{http}'}));
+    final response = await http.get(Uri.http(
+        "200.13.5.14:7102", "/api/Libro/busqueda/" + palabra, {'q': '{http}'}));
 
     if (response.statusCode == 200) {
       Iterable l = json.decode(response.body);

@@ -150,39 +150,41 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                           onPressed: () async => {
                             copias = await buscarCopias(),
                             showDialog(
-                                context: context,
-                                builder: (_) => AlertDialog(
-                                      title: const Text("Ejemplares: "),
-                                      content: SizedBox(
-                                        width: 300,
-                                        child: ListView.builder(
-                                            shrinkWrap: true,
-                                            itemCount: copias.length,
-                                            itemBuilder: (context, i) {
-                                              return GestureDetector(
-                                                onTap: (() => Navigator
-                                                    .pushReplacementNamed(
-                                                        context, 'reserva', arguments: args)),
-                                                child: ListTile(
-                                                    title: Text("copia " +
-                                                        copias[i]
-                                                            .idEspecifico
-                                                            .toString()),
-                                                    trailing: Text("Estado: " +
-                                                        copias[i].estado),
-                                                    tileColor: Colors.grey[300],
-                                                    hoverColor: Colors.grey,
-                                                    shape:
-                                                        const RoundedRectangleBorder(
-                                                      side: BorderSide(
-                                                          color: Colors.grey,
-                                                          width: 1),
-                                                    )),
-                                              );
-                                            }),
-                                      ),
-                                    ),
-                                barrierDismissible: true)
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                title: const Text("Ejemplares: "),
+                                content: SizedBox(
+                                  width: 300,
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: copias.length,
+                                      itemBuilder: (context, i) {
+                                        return GestureDetector(
+                                          onTap: (() =>
+                                              Navigator.pushReplacementNamed(
+                                                  context, 'reserva',
+                                                  arguments: args)),
+                                          child: ListTile(
+                                              title: Text("copia " +
+                                                  copias[i]
+                                                      .idEspecifico
+                                                      .toString()),
+                                              trailing: Text("Estado: " +
+                                                  copias[i].estado),
+                                              tileColor: Colors.grey[300],
+                                              hoverColor: Colors.grey,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                side: BorderSide(
+                                                    color: Colors.grey,
+                                                    width: 1),
+                                              )),
+                                        );
+                                      }),
+                                ),
+                              ),
+                              barrierDismissible: true,
+                            )
                           },
                           child: const Text("RESERVA"),
                         ),
@@ -200,7 +202,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
 
   Future<List<CopiaLibro>> buscarCopias() async {
     final response = await http
-        .get(Uri.http("200.13.5.14:7102", "/copialibro/", {'q': '{http}'}));
+        .get(Uri.http("200.13.5.14:7102", "api/copialibro/", {'q': '{http}'}));
 
     if (response.statusCode == 200) {
       Iterable l = json.decode(response.body);
