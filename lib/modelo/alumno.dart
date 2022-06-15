@@ -1,27 +1,47 @@
+// To parse this JSON data, do
+//
+//     final alumno = alumnoFromJson(jsonString);
+
+import 'dart:convert';
+
+List<Alumno> alumnoFromJson(String str) =>
+    List<Alumno>.from(json.decode(str).map((x) => Alumno.fromJson(x)));
+
+String alumnoToJson(List<Alumno> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class Alumno {
+  Alumno({
+    required this.idAlumno,
+    required this.run,
+    required this.nombres,
+    required this.apellidos,
+    required this.email,
+    required this.contrasena,
+  });
+
   int idAlumno;
-  String Nombres = '';
-  String Apellidos = '';
-  String email = '';
-  String contrasenia = '';
-  String Estado = '';
+  String run;
+  String nombres;
+  String apellidos;
+  String email;
+  String contrasena;
 
-  Alumno(
-      {this.idAlumno = 0,
-      this.Nombres = '',
-      this.Apellidos = '',
-      this.email = '',
-      this.contrasenia = '',
-      this.Estado = '',
-      });
+  factory Alumno.fromJson(Map<String, dynamic> json) => Alumno(
+        idAlumno: json["idAlumno"],
+        run: json["run"],
+        nombres: json["nombres"],
+        apellidos: json["apellidos"],
+        email: json["email"],
+        contrasena: json["contrasena"],
+      );
 
-  factory Alumno.fromJson(dynamic json) {
-    return Alumno(
-        idAlumno: json['idAlumno'],
-        Nombres: json['nombres'],
-        Apellidos: json['apellidos'],
-        email: json['email'],
-        contrasenia: json['contrasenia'],
-        Estado: json['estado']);
-  }
+  Map<String, dynamic> toJson() => {
+        "idAlumno": idAlumno,
+        "run": run,
+        "nombres": nombres,
+        "apellidos": apellidos,
+        "email": email,
+        "contrasena": contrasena,
+      };
 }
