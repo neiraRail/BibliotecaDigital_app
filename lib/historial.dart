@@ -1,6 +1,7 @@
 import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:bib_digitalapp/libro_card.dart';
 import 'package:bib_digitalapp/modelo/libro.dart';
+import 'package:bib_digitalapp/prestamo_card.dart';
 import 'package:bib_digitalapp/services/prestamoService.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,8 @@ class VistaHistorial extends StatefulWidget {
 class _VistaHistorialState extends State<VistaHistorial> {
   bool isLoaded = false;
   List<Prestamo>? prestamos;
+  List<Prestamo>? prestamosActivos;
+  List<Prestamo>? prestamosAntiguos;
 
   @override
   void initState() {
@@ -26,6 +29,12 @@ class _VistaHistorialState extends State<VistaHistorial> {
 
   fetchPrestamos() async {
     prestamos = await PrestamoService.getPrestamosPorAlumno(1);
+
+    prestamosActivos =
+        prestamos?.where((element) => element.isPrestado == true).toList();
+    prestamosAntiguos =
+        prestamos?.where((element) => element.isPrestado == false).toList();
+
     if (prestamos != null) {
       setState(() {
         isLoaded = true;
@@ -72,17 +81,11 @@ class _VistaHistorialState extends State<VistaHistorial> {
                       ),
                       color: Colors.grey),
                   child: ListView.builder(
-                    itemCount: 2,
+                    itemCount: prestamosActivos?.length,
                     primary: false,
                     itemBuilder: (context, i) {
-                      return LibroCard(
-                        libro: Libro(),
-                        boton: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.red,
-                            ),
-                            onPressed: () {},
-                            child: const Text("Cancelar")),
+                      return PrestamoCard(
+                        prestamo: prestamosActivos![i],
                       );
                     },
                   ),
@@ -106,10 +109,10 @@ class _VistaHistorialState extends State<VistaHistorial> {
                       ),
                       color: Colors.grey),
                   child: ListView.builder(
-                    itemCount: prestamos?.length,
+                    itemCount: prestamosAntiguos?.length,
                     itemBuilder: (context, i) {
-                      return LibroCard(
-                        libro: Libro(),
+                      return PrestamoCard(
+                        prestamo: prestamosAntiguos![i],
                       );
                     },
                   ),
