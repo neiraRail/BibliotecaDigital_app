@@ -80,10 +80,10 @@ class _PrestamoCardState extends State<PrestamoCard> {
                           ],
                         ),
                         Row(
-                          children: const [
-                            Text("Libro nombre: ",
+                          children: [
+                            const Text("Libro nombre: ",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
-                            Flexible(child: Text("Nombre del libro")),
+                            Flexible(child: Text("Copia nro: "+ widget.prestamo.idCopiaLibro.toString())),
                           ],
                         ),
                         if (widget.alumno != null) const Divider(),
