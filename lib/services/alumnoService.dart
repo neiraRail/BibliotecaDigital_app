@@ -9,7 +9,7 @@ class AlumnoService {
     //     "200.13.5.14:7102", "/api/Libro/busqueda/" + palabra, {'q': '{http}'}));
 
     // var uri = Uri.parse('http://http://200.13.5.14:7102/api/prestamo/');
-    var uri = Uri.http("200.13.5.14:7102", "/api/alumnos/", {'q': '{http}'});
+    var uri = Uri.http("200.13.5.14:7102", "/api/alumno/", {'q': '{http}'});
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var json = response.body;

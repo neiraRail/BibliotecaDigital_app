@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      initialRoute: 'perfil',
+      initialRoute: 'historialWeb',
       routes: {
         'buscador': (context) => const VistaBuscador(),
         'navegador': ((context) => const VistaNavegador()),
@@ -53,7 +53,6 @@ class MyApp extends StatelessWidget {
         'subidaManual': ((context) => const subidaManual()),
         'editar': ((context) => const editar()),
         'historialWeb': ((context) => const historialWeb()),
-        
         'carga': (context) => const CargaLibros(),
       },
     );

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'modelo/alumno.dart';
 import 'modelo/prestamo.dart';
 
 class PrestamoCard extends StatefulWidget {
-  Prestamo prestamo;
+  final Prestamo prestamo;
+  final Alumno? alumno;
 
-  PrestamoCard({Key? key, required this.prestamo}) : super(key: key);
+  const PrestamoCard({Key? key, required this.prestamo, this.alumno})
+      : super(key: key);
 
   @override
   State<PrestamoCard> createState() => _PrestamoCardState();
@@ -83,6 +86,28 @@ class _PrestamoCardState extends State<PrestamoCard> {
                             Flexible(child: Text("Nombre del libro")),
                           ],
                         ),
+                        if (widget.alumno != null) const Divider(),
+                        if (widget.alumno != null)
+                          Row(
+                            children: [
+                              const Text("Alumno nombre: ",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              Flexible(
+                                  child: Text(widget.alumno!.nombres +
+                                      " " +
+                                      widget.alumno!.apellidos)),
+                            ],
+                          ),
+                        if (widget.alumno != null)
+                          Row(
+                            children: [
+                              const Text("RUN: ",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              Flexible(child: Text(widget.alumno!.run)),
+                            ],
+                          ),
                       ],
                     ),
                   ),
