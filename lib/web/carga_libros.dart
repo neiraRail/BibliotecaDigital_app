@@ -1,5 +1,9 @@
+import 'package:bib_digitalapp/web/drop_zone_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
+
+import '../modelo/file_DataModel.dart';
+import 'dropped_file_widget.dart';
 
 class CargaLibros extends StatefulWidget {
   const CargaLibros({Key? key}) : super(key: key);
@@ -9,6 +13,9 @@ class CargaLibros extends StatefulWidget {
 }
 
 class _CargaLibrosState extends State<CargaLibros> {
+  late DropzoneViewController controller;
+  File_Data_Model? file;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,24 +23,12 @@ class _CargaLibrosState extends State<CargaLibros> {
         title: const Text("Carga de libros"),
       ),
       body: Column(children: [
-        Padding(
-          padding: const EdgeInsets.all(30),
-          child: Container(
-            width: 900,
-            height: 400,
-            color: Colors.grey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Icon(
-                  Icons.file_upload,
-                  size: 100,
-                ),
-                Text("Suelte el archivo aquí")
-              ],
-            ),
-          ),
+        DropZoneWidget(
+            onDroppedFile: (file) => setState(() => this.file = file)),
+        SizedBox(
+          height: 10,
         ),
+        DroppedFileWidget(file: file),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
