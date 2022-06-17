@@ -37,6 +37,7 @@ dependencies:
   qr_code_scanner: ^0.7.0
   http: ^0.13.4
   qr_flutter: ^4.0.0
+  flutter_dropzone: ^2.0.1
 
 dev_dependencies:
   flutter_test:
