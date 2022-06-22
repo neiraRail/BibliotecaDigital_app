@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:bib_digitalapp/libro_card.dart';
+import 'package:bib_digitalapp/modelo/copiaLibro.dart';
 import 'package:bib_digitalapp/modelo/libro.dart';
 import 'package:bib_digitalapp/modelo/prestamo.dart';
 import 'package:bib_digitalapp/modelo/reserva.dart';
@@ -27,7 +28,10 @@ class _VistaDetalleReservaState extends State<VistaDetalleReserva>
  {
     Reserva? reserva ;
     int id = 1;
-
+    String nombre= '';
+    String fecha='';
+    String matricula='';
+    CopiaLibro? copialibro;
   final busquedaController = TextEditingController();
   bool isLoaded = false;
   @override
@@ -38,8 +42,12 @@ class _VistaDetalleReservaState extends State<VistaDetalleReserva>
   
   fetchReserva() async {
     reserva = await ReservaService.getReserva(id) ;
-   
+    
     if (reserva != null) {
+      nombre=reserva!.alumno.nombres+reserva!.alumno.apellidos;
+      fecha=reserva!.fecha.toIso8601String();
+      matricula=reserva!.alumno.run;
+      copialibro=reserva!.copiaLibro;
       setState(() {
         isLoaded = true;
       });
@@ -82,12 +90,13 @@ Detalles de la reserva''',
               const SizedBox(height: 25
               ,),
 
-              LibroCard(libro: reserva!.copiaLibro.libro),
+              LibroCard(libro: copialibro!.libro),
               const SizedBox(height: 20,),
               const Text("Alumno", style: TextStyle(fontSize:18) ,),
               const SizedBox(height: 15,),
               Text(
-                '',
+                nombre+'    '+matricula+ '''
+                '''+fecha,
                 style: TextStyle(fontSize: 15),
               ),
               const SizedBox(height: 60,),
