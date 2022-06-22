@@ -8,6 +8,7 @@ import 'package:bib_digitalapp/qr_lector.dart';
 import 'package:bib_digitalapp/qr_reserva.dart';
 
 import 'package:bib_digitalapp/web/buscador.dart';
+import 'package:bib_digitalapp/web/detalle_reserva.dart';
 import 'package:bib_digitalapp/web/editar.dart';
 import 'package:bib_digitalapp/web/historialWeb.dart';
 import 'package:bib_digitalapp/web/subida_manual.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      initialRoute: 'historialWeb',
+      initialRoute: 'detalleReserva',
       routes: {
         'buscador': (context) => const VistaBuscador(),
         'navegador': ((context) => const VistaNavegador()),
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
         'editar': ((context) => const editar()),
         'historialWeb': ((context) => const historialWeb()),
         'carga': (context) => const CargaLibros(),
+        'detalleReserva':(context) => const VistaDetalleReserva(),
       },
     );
   }

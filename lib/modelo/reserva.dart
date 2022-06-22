@@ -4,8 +4,12 @@ import 'dart:convert';
 import 'package:bib_digitalapp/modelo/copiaLibro.dart';
 
 
-List<Reserva> reservaFromJson(String str) =>
+List<Reserva> reservasFromJson(String str) =>
     List<Reserva>.from(json.decode(str).map((x) => Reserva.fromJson(x)));
+
+Reserva reservaFromJson(String str) =>
+    Reserva.fromJson(jsonDecode(str));
+
 
 String reservaToJson(List<Reserva> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -15,7 +19,7 @@ class Reserva {
     required this.idReserva,
     required this.copiaLibro,
     required this.alumno ,
-    required  this.fecha
+    required  this.fecha,
   });
   int idReserva;
   CopiaLibro copiaLibro;

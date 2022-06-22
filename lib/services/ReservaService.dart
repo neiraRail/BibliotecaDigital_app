@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import '../modelo/reserva.dart';
 
 class ReservaService {
-  static Future<List< Reserva>?> get Reservas() async {
+  static Future<Reserva?> get getReservaPorId(int idreserva) async {
     var client = http.Client();
 
     // final response = await http.get(Uri.http(
@@ -10,7 +10,7 @@ class ReservaService {
 
     // var uri = Uri.parse('http://http://200.13.5.14:7102/api/reserva/');
     var uri = Uri.http("200.13.5.14:7102",
-        "/api/reserva/historial/" + alumno.toString(), {'q': '{http}'});
+        "/api/reserva/historial/" + idreserva.toString(), {'q': '{http}'});
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var json = response.body;
@@ -18,15 +18,15 @@ class ReservaService {
     }
     return null;
   }
-
-  static Future<List<Reserva>?> getReservas() async {
+  static Future<Reserva?>getReserva(int idreserva) async {
     var client = http.Client();
 
     // final response = await http.get(Uri.http(
     //     "200.13.5.14:7102", "/api/Libro/busqueda/" + palabra, {'q': '{http}'}));
 
     // var uri = Uri.parse('http://http://200.13.5.14:7102/api/reserva/');
-    var uri = Uri.http("200.13.5.14:7102", "/api/reserva/", {'q': '{http}'});
+    var uri = Uri.http("200.13.5.14:7102",
+        "/api/reserva/historial/" + idreserva.toString(), {'q': '{http}'});
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var json = response.body;
@@ -34,4 +34,5 @@ class ReservaService {
     }
     return null;
   }
+
 }
