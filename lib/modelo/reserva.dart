@@ -1,22 +1,38 @@
 import 'package:bib_digitalapp/modelo/alumno.dart';
+import 'dart:convert';
+
+import 'package:bib_digitalapp/modelo/copiaLibro.dart';
+
+
+List<Reserva> reservaFromJson(String str) =>
+    List<Reserva>.from(json.decode(str).map((x) => Reserva.fromJson(x)));
+
+String reservaToJson(List<Reserva> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Reserva {
-  int IdReserva;
-  int CopiaLibro =0;
-  int Alumno = 0;
-  String Fecha = '';
+  Reserva({
+    required this.idReserva,
+    required this.copiaLibro,
+    required this.alumno ,
+    required  this.fecha
+  });
+  int idReserva;
+  CopiaLibro copiaLibro;
+  Alumno alumno;
+  DateTime fecha;
 
-  Reserva(
-      {this.IdReserva = 0,
-      this.CopiaLibro = 0,
-      this.Alumno = 0,
-      this.Fecha = '2000-01-02 00:00:00'});
 
-  factory Reserva.fromJson(dynamic json) {
-    return Reserva(
-        IdReserva: json['idLibro'],
-        CopiaLibro: json['nombre'],
-        Alumno: json['autor'],
-        Fecha: json['ano']);
+  factory Reserva.fromJson(Map<String,dynamic>json) => Reserva(
+        idReserva: json["idReserva"],
+        copiaLibro: json["copiaLibro"],
+        alumno: json["alumno"],
+        fecha: DateTime.parse(json["fecha"])
+        );
+  Map<String, dynamic> toJson() => {
+        "idReserva": idReserva,
+        "copiaLibro": copiaLibro,
+        "fecha": fecha.toIso8601String(),
+        "alumno": alumno,
+      };
   }
-}
