@@ -2,6 +2,17 @@ import 'package:http/http.dart' as http;
 import '../modelo/reserva.dart';
 
 class ReservaService {
+ static prestamofromReserva(int id) async {
+  var client = http.Client();
+  var uri = Uri.http("200.13.5.14:7102",
+        "/api/prestamo/" + id.toString(), {'q': '{http}'});
+
+  var response = await client.post(uri, headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    });
+ }
+
   static Future<Reserva?> getReservaPorId(int idreserva) async {
     var client = http.Client();
 

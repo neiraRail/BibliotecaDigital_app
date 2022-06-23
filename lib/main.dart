@@ -6,7 +6,6 @@ import 'package:bib_digitalapp/navegador.dart';
 import 'package:bib_digitalapp/perfil.dart';
 import 'package:bib_digitalapp/qr_lector.dart';
 import 'package:bib_digitalapp/qr_reserva.dart';
-
 import 'package:bib_digitalapp/web/buscador.dart';
 import 'package:bib_digitalapp/web/detalle_reserva.dart';
 import 'package:bib_digitalapp/web/editar.dart';
@@ -56,6 +55,7 @@ class MyApp extends StatelessWidget {
         'historialWeb': ((context) => const historialWeb()),
         'carga': (context) => const CargaLibros(),
         'detalleReserva':(context) => const VistaDetalleReserva(),
+        
       },
     );
   }

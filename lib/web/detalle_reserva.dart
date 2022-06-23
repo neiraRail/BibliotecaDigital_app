@@ -8,7 +8,7 @@ import 'package:bib_digitalapp/modelo/reserva.dart';
 import 'package:bib_digitalapp/prestamo_card.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-
+import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
 import '../modelo/libro.dart';
@@ -27,7 +27,8 @@ class _VistaDetalleReservaState extends State<VistaDetalleReserva>
   Reserva? reserva;
   int id = 1;
   String nombre= '';
-  String fecha='';
+  String fecha1='';
+  String fecha2='';
   String matricula='';
   CopiaLibro? copialibro;
   bool isLoaded = false;
@@ -40,10 +41,11 @@ class _VistaDetalleReservaState extends State<VistaDetalleReserva>
   
   fetchReserva() async {
     reserva = await ReservaService.getReservaPorId(id) ;
-    /*nombre=reserva!.alumno.nombres+reserva!.alumno.apellidos;
-      fecha=reserva!.fechaReserva.toIso8601String();
-      matricula=reserva!.alumno.run;
-      copialibro=reserva!.copiaLibro;*/
+    nombre=reserva!.alumno.nombres+" "+reserva!.alumno.apellidos;
+    fecha1=DateFormat('yyyy-MM-dd – kk:mm').format(reserva!.fechaReserva);
+    fecha2=DateFormat('yyyy-MM-dd – kk:mm').format(reserva!.fechaLimite);
+    matricula=reserva!.alumno.run;
+    copialibro=reserva!.copiaLibro;
     if (reserva != null) {
       
       setState(() {
@@ -52,11 +54,20 @@ class _VistaDetalleReservaState extends State<VistaDetalleReserva>
     }
   }
 
+  aceptar() async {
+    //mandar post 
+    await ReservaService.prestamofromReserva(id) ;
+    Navigator.pushNamed(context, 'buscador');
+
+  }
+
 
 
   @override
   Widget build(BuildContext context) {
-    
+    //final args = ModalRoute.of(context)!.settings.arguments as int;
+    //id=args;
+    fetchReserva();
     return Scaffold(
       appBar: BaseAppBar(
         title: const Text("Detalles Reservsa"),
@@ -88,29 +99,37 @@ Detalles de la reserva''',
               const SizedBox(height: 25
               ,),
 
-              //LibroCard(libro: copialibro!.libro),
+              LibroCard(libro: copialibro!.libro),
               const SizedBox(height: 20,),
               const Text("Alumno", style: TextStyle(fontSize:18) ,),
               const SizedBox(height: 15,),
-              /*Text(
-                nombre+'    '+matricula+ '''
-                '''+fecha,
+              Text(
+                nombre+'    '+matricula,
                 style: TextStyle(fontSize: 15),
-              ),*/
+              ),
+               const SizedBox(height: 20,),
+              Text(
+                "fecha Reserva:  "+fecha1!,
+                style: TextStyle(fontSize: 15),
+              ),
+              Text(
+                "fecha Limite:  "+fecha2! ,
+                style: TextStyle(fontSize: 15),
+              ),
+             
               const SizedBox(height: 60,),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.green,
                 ),
-                onPressed: () => Navigator.pushNamed(context, 'buscador'),
+                onPressed: () => aceptar(),
                 child: const Text("Aceptar"),
               ),
-
-
             ],
           ),
         ),
       ),
-    ));
+    )
+    );
   }
 }
