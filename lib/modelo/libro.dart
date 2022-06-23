@@ -1,19 +1,10 @@
 class Libro {
-  int idLibro;
-  String titulo = '';
-  String autor = '';
-  int ano = 0;
-  String editorial = '';
-  String resumen = '';
-  String otroTitulo = "string";
-  String cdd = "string";
-  String isbn = "string";
-  String tipoMaterial = "Novela";
+ 
 
   Libro({
-    this.idLibro = 0,
-    this.titulo = '',
-    this.autor = '',
+    required this.idLibro,
+    required this.titulo,
+    required this.autor,
     this.ano = 0,
     this.editorial = '',
     this.resumen = '',
@@ -22,6 +13,16 @@ class Libro {
     this.isbn = "",
     this.tipoMaterial = "",
   });
+  int idLibro;
+  String titulo;
+  String autor;
+  int ano = 0;
+  String editorial = '';
+  String resumen = '';
+  String otroTitulo = "string";
+  String cdd = "string";
+  String isbn = "string";
+  String tipoMaterial = "Novela";
 
   factory Libro.fromJson(dynamic json) {
     return Libro(
