@@ -89,7 +89,7 @@ class _VistaDetalleReservaState extends State<VistaDetalleReserva>
                 alignment: Alignment.centerRight,
                 child: IconButton(
                   color: Colors.black,
-                   onPressed: () => Navigator.pushNamed(context, 'buscador'), icon: const Icon (Icons.close)),
+                   onPressed: () => Navigator.pushNamed(context, 'lector'), icon: const Icon (Icons.close)),
               ),
               const Text(
                 '''
@@ -109,11 +109,11 @@ Detalles de la reserva''',
               ),
                const SizedBox(height: 20,),
               Text(
-                "fecha Reserva:  "+fecha1!,
+                "fecha Reserva:  "+fecha1,
                 style: TextStyle(fontSize: 15),
               ),
               Text(
-                "fecha Limite:  "+fecha2! ,
+                "fecha Limite:  "+fecha2 ,
                 style: TextStyle(fontSize: 15),
               ),
              

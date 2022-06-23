@@ -18,7 +18,7 @@ class _VistaReservaQRState extends State<VistaReservaQR> {
   @override
   Widget build(BuildContext context) {
      final args = ModalRoute.of(context)!.settings.arguments as Libro;
-     String horaMax = "18:00:00";
+     String horaMax = "19:45:00";
     return Scaffold(
       appBar: BaseAppBar(
         title: const Text("QR Reserva"),
