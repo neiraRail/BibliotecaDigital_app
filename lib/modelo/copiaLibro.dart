@@ -15,7 +15,7 @@ class CopiaLibro {
     return CopiaLibro(
       idEspecifico: json['idEspecifico'],
       estado: json['estado'],
-      libro: Libro.fromJson(json['Libro']),
+      libro: Libro.fromJson(json['libro']),
     );
   }
 }
