@@ -115,8 +115,10 @@ class _VistaBuscadorState extends State<VistaBuscador> {
   }
 
   Future<List<Libro>> buscarPalabra(palabra) async {
-    final response = await http.get(Uri.http(
-        "200.13.5.14:7102", "/api/Libro/busqueda/" + palabra, {'q': '{http}'}));
+    final response = await http.get(
+        Uri.http("200.13.5.14:7102", "/api/libro/busqueda/" + palabra,
+            {'q': '{http}'}),
+        headers: {"Access-Control-Allow-Origin": "*"});
 
     if (response.statusCode == 200) {
       Iterable l = json.decode(response.body);
@@ -125,6 +127,7 @@ class _VistaBuscadorState extends State<VistaBuscador> {
 
       return libros;
     } else {
+      print(response.body);
       return [];
     }
   }

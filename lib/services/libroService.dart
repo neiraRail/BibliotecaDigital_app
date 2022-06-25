@@ -6,7 +6,8 @@ class LibroService {
     var client = http.Client();
 
     var uri = Uri.http("200.13.5.14:7102", "/api/libro/", {'q': '{http}'});
-    var response = await client.get(uri);
+    var response =
+        await client.get(uri, headers: {"Access-Control-Allow-Origin": "*"});
     if (response.statusCode == 200) {
       var json = response.body;
       return librosFromJson(json);
@@ -20,7 +21,8 @@ class LibroService {
     var uri = Uri.http("200.13.5.14:7102", "/api/libro/", {'q': '{http}'});
     var response = await client.post(uri, body: libroToJson(libro), headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json"
+      "Accept": "application/json",
+      "Access-Control-Allow-Origin": "*"
     });
     if (response.statusCode == 200) {
       var json = response.body;
