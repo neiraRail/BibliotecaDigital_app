@@ -76,14 +76,14 @@ class _PrestamoCardState extends State<PrestamoCard> {
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             Flexible(
                                 child: Text(
-                                    widget.prestamo.idCopiaLibro.toString())),
+                                    widget.prestamo.copiaLibro.idEspecifico.toString())),
                           ],
                         ),
                         Row(
                           children: [
                             const Text("Libro nombre: ",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
-                            Flexible(child: Text("Copia nro: "+ widget.prestamo.idCopiaLibro.toString())),
+                            Flexible(child: Text("Copia nro: "+ widget.prestamo.copiaLibro.idEspecifico.toString())),
                           ],
                         ),
                         if (widget.alumno != null) const Divider(),

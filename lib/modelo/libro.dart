@@ -16,41 +16,42 @@ String libroToJson(Libro data) => json.encode(data.toJson());
 
 class Libro {
   Libro({
-    this.idLibro = 0,
+    this.idLibro,
     required this.titulo,
     required this.autor,
-    required this.ano,
-    required this.editorial,
-    required this.resumen,
-    required this.otroTitulo,
-    required this.cdd,
-    required this.isbn,
-    required this.tipoMaterial,
+    this.ano = 0,
+    this.editorial = '',
+    this.resumen = '',
+    this.otroTitulo = "",
+    this.cdd = "",
+    this.isbn = "",
+    this.tipoMaterial = "",
   });
-
-  int idLibro;
+  int? idLibro;
   String titulo;
   String autor;
-  int ano;
-  String editorial;
-  String resumen;
-  String otroTitulo;
-  String cdd;
-  String isbn;
-  String tipoMaterial;
+  int ano = 0;
+  String editorial = '';
+  String resumen = '';
+  String otroTitulo = "string";
+  String cdd = "string";
+  String isbn = "string";
+  String tipoMaterial = "Novela";
 
-  factory Libro.fromJson(Map<String, dynamic> json) => Libro(
-        idLibro: json["idLibro"],
-        titulo: json["titulo"],
-        autor: json["autor"],
-        ano: json["ano"],
-        editorial: json["editorial"],
-        resumen: json["resumen"],
-        otroTitulo: json["otroTitulo"],
-        cdd: json["cdd"],
-        isbn: json["isbn"],
-        tipoMaterial: json["tipoMaterial"],
-      );
+  factory Libro.fromJson(dynamic json) {
+    return Libro(
+      idLibro: json['idLibro'],
+      titulo: json['titulo'],
+      autor: json['autor'],
+      ano: json['ano'],
+      editorial: json['editorial'],
+      resumen: json['resumen'],
+      otroTitulo: json['otroTitulo'],
+      cdd: json["cdd"],
+      isbn: json["isbn"],
+      tipoMaterial: json["tipoMaterial"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "idLibro": idLibro,

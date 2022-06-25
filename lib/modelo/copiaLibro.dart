@@ -1,19 +1,38 @@
+import 'dart:convert';
+
+import 'libro.dart';
+List<CopiaLibro> copialibrosFromJson(String str) =>
+    List<CopiaLibro>.from(json.decode(str).map((x) => Libro.fromJson(x)));
+
+Libro copiaLibroFromJson(String str) {
+  return Libro.fromJson(jsonDecode(str));
+}
+
+String copiaLibroToJson(List<CopiaLibro> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class CopiaLibro {
   int idEspecifico;
-  String estado = '';
-  int idLibro;
+  String estado;
+  Libro libro;
 
   CopiaLibro({
-    this.idEspecifico = 0,
-    this.estado = '',
-    this.idLibro = 0,
+    required this.idEspecifico,
+    required this.estado,
+    required this.libro,
   });
 
   factory CopiaLibro.fromJson(dynamic json) {
     return CopiaLibro(
       idEspecifico: json['idEspecifico'],
       estado: json['estado'],
-      idLibro: json['idLibro'],
+      libro: Libro.fromJson(json['libro']),
     );
   }
+   
+  Map<String, dynamic> toJson() => {
+        "idEspecifico": idEspecifico,
+        "estado": estado,
+        "ibro": libro,
+      };
 }

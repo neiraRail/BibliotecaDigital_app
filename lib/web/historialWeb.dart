@@ -85,7 +85,7 @@ class _historialWebState extends State<historialWeb> {
                       prestamo: prestamos![i],
                       alumno: alumnos
                           ?.where((element) =>
-                              element.idAlumno == prestamos![i].idAlumno)
+                              element.idAlumno == prestamos![i].alumno.idAlumno)
                           .first,
                     );
                   },
