@@ -7,6 +7,12 @@ import 'dart:convert';
 List<Alumno> alumnoFromJson(String str) =>
     List<Alumno>.from(json.decode(str).map((x) => Alumno.fromJson(x)));
 
+Alumno aalumnoFromJson(String str){
+
+  return Alumno.fromJson(jsonDecode(str));
+}
+    
+
 String alumnoToJson(List<Alumno> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
