@@ -87,6 +87,7 @@ class _DropZoneWidgetState extends State<DropZoneWidget> {
     final mime = await controller.getFileMIME(event);
     final byte = await controller.getFileSize(event);
     final url = await controller.createFileUrl(event);
+    final stream = await controller.getFileStream(event);
 
     print('Name : $name');
     print('Mime: $mime');
@@ -95,8 +96,8 @@ class _DropZoneWidgetState extends State<DropZoneWidget> {
     print('URL: $url');
 
     // update the data model with recent file uploaded
-    final droppedFile =
-        File_Data_Model(name: name, mime: mime, bytes: byte, url: url);
+    final droppedFile = File_Data_Model(
+        name: name, mime: mime, bytes: byte, url: url, stream: stream);
 
     //Update the UI
     widget.onDroppedFile(droppedFile);

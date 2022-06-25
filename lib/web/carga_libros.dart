@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 
 import '../modelo/file_DataModel.dart';
+import '../services/archivoService.dart';
 import 'dropped_file_widget.dart';
 
 class CargaLibros extends StatefulWidget {
@@ -24,8 +25,11 @@ class _CargaLibrosState extends State<CargaLibros> {
       ),
       body: Column(children: [
         DropZoneWidget(
-            onDroppedFile: (file) => setState(() => this.file = file)),
-        SizedBox(
+          onDroppedFile: (file) => setState(
+            () => {this.file = file},
+          ),
+        ),
+        const SizedBox(
           height: 10,
         ),
         DroppedFileWidget(file: file),
@@ -52,7 +56,16 @@ class _CargaLibrosState extends State<CargaLibros> {
               style: ElevatedButton.styleFrom(
                 primary: Colors.green,
               ),
-              onPressed: () {},
+              onPressed: () {
+                try {
+                  ArchivoService.enviar(file);
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Hubo un error"),
+                    backgroundColor: Colors.red,
+                  ));
+                }
+              },
               child: const SizedBox(
                 height: 40,
                 width: 100,

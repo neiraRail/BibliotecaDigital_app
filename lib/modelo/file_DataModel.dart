@@ -3,12 +3,14 @@ class File_Data_Model {
   final String mime;
   final int bytes;
   final String url;
+  Stream<List<int>> stream;
 
   File_Data_Model(
       {required this.name,
       required this.mime,
       required this.bytes,
-      required this.url});
+      required this.url,
+      required this.stream});
 
   String get size {
     final kb = bytes / 1024;
