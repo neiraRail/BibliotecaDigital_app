@@ -1,10 +1,6 @@
-import 'package:bib_digitalapp/web/drop_zone_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:desktop_drop/desktop_drop.dart';
-import '../modelo/file_DataModel.dart';
 import '../services/archivoService.dart';
-import 'dropped_file_widget.dart';
 import 'package:cross_file/cross_file.dart';
 
 class CargaLibros extends StatefulWidget {
@@ -15,7 +11,7 @@ class CargaLibros extends StatefulWidget {
 }
 
 class _CargaLibrosState extends State<CargaLibros> {
-  late XFile _file;
+  XFile? _file;
 
   @override
   Widget build(BuildContext context) {
@@ -24,65 +20,76 @@ class _CargaLibrosState extends State<CargaLibros> {
         title: const Text("Carga de libros"),
       ),
       body: Column(children: [
-        Wrap(
-          direction: Axis.horizontal,
-          runSpacing: 8,
-          spacing: 8,
-          children: [
-            ExmapleDragTarget(
-              onDropped: (file) {
-                setState(() {
-                  _file = file;
-                });
-              },
-            ),
-          ],
+        Expanded(
+          child: Wrap(
+            direction: Axis.horizontal,
+            runSpacing: 8,
+            spacing: 8,
+            children: [
+              ExmapleDragTarget(
+                onDropped: (file) {
+                  setState(() {
+                    _file = file;
+                  });
+                },
+              ),
+            ],
+          ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.red,
-              ),
-              onPressed: () {},
-              child: const SizedBox(
-                height: 40,
-                width: 100,
-                child: Center(
-                  child: Text("Cancelar"),
+        const SizedBox(
+          height: 20,
+        ),
+        Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                ),
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, 'buscadorWeb');
+                },
+                child: const SizedBox(
+                  height: 40,
+                  width: 100,
+                  child: Center(
+                    child: Text("Cancelar"),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              width: 30,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.green,
+              const SizedBox(
+                width: 30,
               ),
-              onPressed: () {
-                try {
-                  ArchivoService.enviar(_file);
-                } catch (e) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(e.toString()),
-                    backgroundColor: Colors.red,
-                  ));
-                }
-              },
-              child: const SizedBox(
-                height: 40,
-                width: 100,
-                child: Center(
-                  child: Text("Aceptar"),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.green,
+                ),
+                onPressed: _file != null
+                    ? () {
+                        try {
+                          ArchivoService.enviar(_file!);
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(e.toString()),
+                            backgroundColor: Colors.red,
+                          ));
+                        }
+                      }
+                    : null,
+                child: const SizedBox(
+                  height: 40,
+                  width: 100,
+                  child: Center(
+                    child: Text("Aceptar"),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              width: 100,
-            ),
-          ],
+              const SizedBox(
+                width: 100,
+              ),
+            ],
+          ),
         )
       ]),
     );
@@ -139,25 +146,27 @@ class _ExmapleDragTargetState extends State<ExmapleDragTarget> {
           offset = null;
         });
       },
-      child: Container(
-        height: 200,
-        width: 200,
-        color: _dragging ? Colors.blue.withOpacity(0.4) : Colors.black26,
-        child: Stack(
-          children: [
-            if (_list.isEmpty)
-              const Center(child: Text("Drop here"))
-            else
-              Text(_list.map((e) => e.path).join("\n")),
-            if (offset != null)
-              Align(
-                alignment: Alignment.topRight,
-                child: Text(
-                  '$offset',
-                  style: Theme.of(context).textTheme.caption,
-                ),
-              )
-          ],
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Container(
+          height: 374,
+          color: _dragging ? Colors.blue.withOpacity(0.4) : Colors.black26,
+          child: Stack(
+            children: [
+              if (_list.isEmpty)
+                const Center(child: Text("Suelte el archivo .csv aqui"))
+              else
+                Text(_list.map((e) => e.path).join("\n")),
+              if (offset != null)
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Text(
+                    '$offset',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                )
+            ],
+          ),
         ),
       ),
     );
