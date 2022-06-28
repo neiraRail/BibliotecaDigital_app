@@ -48,7 +48,7 @@ class _BuscadorWebState extends State<BuscadorWeb> {
             height: 20,
           ),
           Row(
-            children: [
+            children: const [
               //aqui voy a poner filtros
             ],
           ),
@@ -69,7 +69,29 @@ class _BuscadorWebState extends State<BuscadorWeb> {
                   return GestureDetector(
                       onTap: () => Navigator.pushNamed(context, 'datos',
                           arguments: busqueda[i]),
-                      child: LibroCard(libro: busqueda[i]));
+                      child: LibroCard(
+                        libro: busqueda[i],
+                        boton: Row(children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, "editar",
+                                  arguments: busqueda[i]);
+                            },
+                            child: const Text("Editar"),
+                            style:
+                                ElevatedButton.styleFrom(primary: Colors.amber),
+                          ),
+                          // const SizedBox(
+                          //   width: 20,
+                          // ),
+                          // ElevatedButton(
+                          //   onPressed: () {},
+                          //   child: const Text("Eliminar"),
+                          //   style:
+                          //       ElevatedButton.styleFrom(primary: Colors.red),
+                          // )
+                        ]),
+                      ));
                 },
               ),
             ),
