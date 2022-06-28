@@ -9,7 +9,7 @@ class ArchivoService {
     print(file.readAsString());
     var uri = Uri.http("l200.13.5.14:7102", "/api/archivos/", {'q': '{http}'});
     var request = http.MultipartRequest('POST', uri);
-    request.files.add(await http.MultipartFile.fromPath('file', file.path));
+    request.files.add(await http.MultipartFile.fromPath('file', file.path!));
     request.headers["Access-Control-Allow-Origin"] = "*";
     var res = await request.send();
 

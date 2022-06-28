@@ -56,7 +56,7 @@ class _VistaLectorQRState extends State<VistaLectorQR> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
-        Navigator.pushNamed(context, 'detalleReserva', arguments: 22);
+        Navigator.pushNamed(context, 'detalleReserva', arguments: int.parse(result!.code!));
       });
     });
   }

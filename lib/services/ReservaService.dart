@@ -12,6 +12,13 @@ class ReservaService {
       "Content-Type": "application/json",
       "Accept": "application/json"
     });
+
+  if(response.statusCode == 200){
+    return true;
+  }
+  else{
+    return false;
+  }
  }
 
   static Future<Reserva?> getReservaPorId(int idreserva) async {
@@ -21,9 +28,11 @@ class ReservaService {
     //     "200.13.5.14:7102", "/api/Libro/busqueda/" + palabra, {'q': '{http}'}));
 
     // var uri = Uri.parse('http://http://200.13.5.14:7102/api/reserva/');
+    print("ID OCUPADA: "+idreserva.toString());
     var uri = Uri.http("200.13.5.14:7102",
         "/api/reserva/" + idreserva.toString(), {'q': '{http}'});
     var response = await client.get(uri);
+    print(response.body);
     if (response.statusCode == 200) {
       var json = response.body;
       return reservaFromJson(json);

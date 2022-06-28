@@ -23,7 +23,6 @@ class VistaDetalleReserva extends StatefulWidget {
 
 class _VistaDetalleReservaState extends State<VistaDetalleReserva> {
   Reserva? reserva;
-  int id = 22;
   String nombre = '';
   String fecha1 = '';
   String fecha2 = '';
@@ -34,16 +33,24 @@ class _VistaDetalleReservaState extends State<VistaDetalleReserva> {
   @override
   void initState() {
     super.initState();
-    fetchReserva();
   }
 
-  fetchReserva() async {
-    reserva = await ReservaService.getReservaPorId(id);
-    nombre = reserva!.alumno.nombres + " " + reserva!.alumno.apellidos;
-    fecha1 = DateFormat('yyyy-MM-dd - kk:mm').format(reserva!.fechaReserva);
-    fecha2 = DateFormat('yyyy-MM-dd - kk:mm').format(reserva!.fechaLimite);
-    matricula = reserva!.alumno.run;
-    copialibro = reserva!.copiaLibro;
+  fetchReserva(int numero) async {
+    reserva = await ReservaService.getReservaPorId(numero);
+    if(reserva!=null){
+      print(reservaToJson(reserva!));
+      nombre = reserva!.alumno.nombres + " " + reserva!.alumno.apellidos;
+      fecha1 = DateFormat('yyyy-MM-dd - kk:mm').format(reserva!.fechaReserva);
+      fecha2 = DateFormat('yyyy-MM-dd - kk:mm').format(reserva!.fechaLimite);
+      matricula = reserva!.alumno.run;
+      copialibro = reserva!.copiaLibro;
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Hubo un error"),
+        backgroundColor: Colors.red,
+      ));
+    }
+
     if (reserva != null) {
       setState(() {
         isLoaded = true;
@@ -51,20 +58,54 @@ class _VistaDetalleReservaState extends State<VistaDetalleReserva> {
     }
   }
 
-  aceptar() async {
+  aceptar(id) async {
     //mandar post
-    await ReservaService.prestamofromReserva(id);
-    Navigator.pushNamed(context, 'buscador');
+    showDialog(
+      // The user CANNOT close this dialog  by pressing outsite it
+        barrierDismissible: false,
+        context: context,
+        builder: (_) {
+          return Dialog(
+            // The background color
+            backgroundColor: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  // The loading indicator
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  // Some text
+                  Text('Cargando...')
+                ],
+              ),
+            ),
+          );
+        });
+
+    var success = await ReservaService.prestamofromReserva(id);
+    Navigator.pop(context);
+    if(success){
+      Navigator.pushNamed(context, 'buscador');
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Hubo un error"),
+        backgroundColor: Colors.red,
+      ));
+    }
+
   }
 
   @override
   Widget build(BuildContext context) {
-    //final args = ModalRoute.of(context)!.settings.arguments as int;
-    //id=args;
-    fetchReserva();
+    final args = ModalRoute.of(context)!.settings.arguments as int;
+    fetchReserva(args);
     return Scaffold(
         appBar: BaseAppBar(
-          title: const Text("Detalles Reservsa"),
+          title: const Text("Detalles Reserva"),
           appBar: AppBar(),
         ),
         body: Visibility(
@@ -94,7 +135,7 @@ Detalles de la reserva''',
                   const SizedBox(
                     height: 25,
                   ),
-                  LibroCard(libro: copialibro!.libro),
+                  if(copialibro!=null) LibroCard(libro: copialibro!.libro),
                   const SizedBox(
                     height: 20,
                   ),
@@ -127,13 +168,16 @@ Detalles de la reserva''',
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green,
                     ),
-                    onPressed: () => aceptar(),
+                    onPressed: () => aceptar(args),
                     child: const Text("Aceptar"),
                   ),
                 ],
               ),
             ),
           ),
-        ));
+          replacement: const Center(
+          child: CircularProgressIndicator(),)
+        ),
+    );
   }
 }
