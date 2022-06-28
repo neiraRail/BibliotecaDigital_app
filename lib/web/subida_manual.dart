@@ -329,6 +329,10 @@ class _subidaManualState extends State<subidaManual> {
           arguments: libroGuardado);
     } catch (e) {
       clearForm();
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Hubo un error"),
+        backgroundColor: Colors.red,
+      ));
     }
   }
 
@@ -343,10 +347,6 @@ class _subidaManualState extends State<subidaManual> {
       cddController.clear();
       isbnController.clear();
       tipomaterialController.clear();
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Hubo un error"),
-        backgroundColor: Colors.red,
-      ));
     });
   }
 }
