@@ -1,21 +1,22 @@
+// To parse this JSON data, do
+//
+//     final libro = libroFromJson(jsonString);
+
 import 'dart:convert';
 
 List<Libro> librosFromJson(String str) =>
     List<Libro>.from(json.decode(str).map((x) => Libro.fromJson(x)));
 
-Libro libroFromJson(String str) {
-  return Libro.fromJson(jsonDecode(str));
-}
-
-String libroToJson(List<Libro> data) =>
+String librosToJson(List<Libro> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+Libro libroFromJson(String str) => Libro.fromJson(json.decode(str));
+
+String libroToJson(Libro data) => json.encode(data.toJson());
 
 class Libro {
- 
-
   Libro({
-    required this.idLibro,
+    this.idLibro,
     required this.titulo,
     required this.autor,
     this.ano = 0,
@@ -26,7 +27,7 @@ class Libro {
     this.isbn = "",
     this.tipoMaterial = "",
   });
-  int idLibro;
+  int? idLibro;
   String titulo;
   String autor;
   int ano = 0;
@@ -52,14 +53,14 @@ class Libro {
     );
   }
 
-   Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "idLibro": idLibro,
         "titulo": titulo,
         "autor": autor,
         "ano": ano,
         "editorial": editorial,
         "resumen": resumen,
-        "totroTitulo": otroTitulo,
+        "otroTitulo": otroTitulo,
         "cdd": cdd,
         "isbn": isbn,
         "tipoMaterial": tipoMaterial,

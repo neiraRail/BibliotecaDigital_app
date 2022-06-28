@@ -5,7 +5,8 @@ class AlumnoService {
   static Future<List<Alumno>?> getAlumnos() async {
     var client = http.Client();
     var uri = Uri.http("200.13.5.14:7102", "/api/alumno/", {'q': '{http}'});
-    var response = await client.get(uri);
+    var response =
+        await client.get(uri, headers: {"Access-Control-Allow-Origin": "*"});
     if (response.statusCode == 200) {
       var json = response.body;
       return alumnoFromJson(json);

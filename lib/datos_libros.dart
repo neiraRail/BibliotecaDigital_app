@@ -20,31 +20,31 @@ class VistaDatosLibros extends StatefulWidget {
 }
 
 class _VistaDatosLibrosState extends State<VistaDatosLibros> {
-  List<CopiaLibro> copias=[];
- bool isDisponible =false;
-  bool isLoaded=true;
+  List<CopiaLibro> copias = [];
+  bool isDisponible = false;
+  bool isLoaded = true;
   //Libro? libro;
 
   @override
   void initState() {
-   
-   super.initState();
+    super.initState();
   }
 
-  fetchCopias(Libro l)async{
-     copias =await CopiaLibroService.buscarCopias(l);
-    if(copias.length>0){
+  fetchCopias(Libro l) async {
+    copias = await CopiaLibroService.buscarCopias(l);
+    if (copias.length > 0) {
       setState(() {
-        isDisponible =true;
-      });}
+        isDisponible = true;
+      });
+    }
   }
- 
 
   @override
   Widget build(BuildContext context) {
-     Libro? libro = ModalRoute.of(context)!.settings.arguments as Libro?;
-     if(libro !=null){ 
-      fetchCopias( libro!);}
+    Libro? libro = ModalRoute.of(context)!.settings.arguments as Libro?;
+    if (libro != null) {
+      fetchCopias(libro);
+    }
     return Scaffold(
       appBar: BaseAppBar(
         title: const Text("Datos Libro"),
@@ -75,7 +75,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                         ),
                         Flexible(
                           child: Text(
-                            libro!.titulo,
+                            libro != null ? libro.titulo : '',
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         )
@@ -92,14 +92,17 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                           Row(children: [
                             const Text("Autor: ",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
-                            Flexible(child: Text(libro!.autor)),
+                            Flexible(
+                                child: Text(libro != null ? libro.autor : '')),
                           ]),
                           Row(
                             children: [
                               const Text("Editorial: ",
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
-                              Flexible(child: Text(libro!.editorial))
+                              Flexible(
+                                  child: Text(
+                                      libro != null ? libro.editorial : ''))
                             ],
                           ),
                           Row(
@@ -108,7 +111,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                 "Año: ",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(libro!.ano.toString()),
+                              Text(libro != null ? libro.ano.toString() : ''),
                             ],
                           ),
                           Row(
@@ -117,7 +120,9 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                               const Text("Resumen: ",
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
-                              Flexible(child: Text(libro!.resumen))
+                              Flexible(
+                                  child:
+                                      Text(libro != null ? libro.resumen : ''))
                             ],
                           ),
                           Row(
@@ -126,7 +131,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                 "otroTitulo: ",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(libro!.otroTitulo),
+                              Text(libro != null ? libro.otroTitulo : ''),
                             ],
                           ),
                           Row(
@@ -135,7 +140,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                 "cdd: ",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(libro!.cdd)
+                              Text(libro != null ? libro.cdd : '')
                             ],
                           ),
                           Row(
@@ -144,7 +149,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                 "isbn: ",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(libro!.isbn)
+                              Text(libro != null ? libro.isbn : '')
                             ],
                           ),
                           Row(
@@ -153,40 +158,33 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                 "tipoMaterial: ",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(libro!.tipoMaterial)
+                              Text(libro != null ? libro.tipoMaterial : '')
                             ],
                           ),
-                        
+
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 150, vertical: 10), 
-                            child: Visibility(
-                              child: 
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
-                ),                  
-                                onPressed:()=>reservar(libro), 
-                                child: Text("Reservar Libro")),
-                             visible: isDisponible)
-                             ),
-                             Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 150,vertical: 10), 
-                            child: Visibility(
-                              child: 
-                              const ElevatedButton(
-                                onPressed: null, 
-                                child: Text("no disponible")),
-                             visible: !isDisponible)
-                             ),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 150, vertical: 10),
+                              child: Visibility(
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.green,
+                                      ),
+                                      onPressed: () => reservar(libro!),
+                                      child: Text("Reservar Libro")),
+                                  visible: isDisponible)),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 150, vertical: 10),
+                              child: Visibility(
+                                  child: const ElevatedButton(
+                                      onPressed: null,
+                                      child: Text("no disponible")),
+                                  visible: !isDisponible)),
                           //FutureBuilder<Libro>(future: futureLibro, builder: ())
-                          
                         ],
-                        
                       ),
-                      
                     ),
-                  
-                    
                   ],
                 ),
               ],
@@ -199,26 +197,22 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
 
   Future<void> reservar(Libro libro) async {
     mostrar_dialogo();
-    PostReserva postReserva= PostReserva(idLibro: libro.idLibro, duracionHoras: 5, idAlumno: 2);
+    PostReserva postReserva =
+        PostReserva(idLibro: libro.idLibro!, duracionHoras: 5, idAlumno: 2);
     Reserva? reserva = await ReservaService.postReserva(postReserva);
-    if(reserva!=null){
+    if (reserva != null) {
       Navigator.pop(context);
-      Navigator.pushNamed(context, 'reserva', arguments:reserva);}
-    else{
+      Navigator.pushNamed(context, 'reserva', arguments: reserva);
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Hubo un error"),
         backgroundColor: Colors.red,
-
       ));
-        Navigator.pop(context);
+      Navigator.pop(context);
     }
-  
-    
   }
 
-
-
-  void mostrar_dialogo(){
+  void mostrar_dialogo() {
     showDialog(
         // The user CANNOT close this dialog  by pressing outsite it
         barrierDismissible: false,
@@ -245,5 +239,4 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
           );
         });
   }
-
 }

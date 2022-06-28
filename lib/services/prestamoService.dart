@@ -11,7 +11,8 @@ class PrestamoService {
     // var uri = Uri.parse('http://http://200.13.5.14:7102/api/prestamo/');
     var uri = Uri.http("200.13.5.14:7102",
         "/api/prestamo/historial/" + alumno.toString(), {'q': '{http}'});
-    var response = await client.get(uri);
+    var response =
+        await client.get(uri, headers: {"Access-Control-Allow-Origin": "*"});
     if (response.statusCode == 200) {
       var json = response.body;
       return prestamoFromJson(json);
@@ -27,7 +28,8 @@ class PrestamoService {
 
     // var uri = Uri.parse('http://http://200.13.5.14:7102/api/prestamo/');
     var uri = Uri.http("200.13.5.14:7102", "/api/prestamo/", {'q': '{http}'});
-    var response = await client.get(uri);
+    var response =
+        await client.get(uri, headers: {"Access-Control-Allow-Origin": "*"});
     if (response.statusCode == 200) {
       var json = response.body;
       return prestamoFromJson(json);

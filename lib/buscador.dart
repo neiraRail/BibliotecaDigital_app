@@ -51,7 +51,8 @@ class _VistaBuscadorState extends State<VistaBuscador> {
                 IconButton(
                   color: Colors.blueAccent,
                   onPressed: () async {
-                    busqueda = await LibroService.buscarPalabra(busquedaController.text);
+                    busqueda = await LibroService.buscarPalabra(
+                        busquedaController.text);
                     setState(() {});
                   },
                   icon: const Icon(Icons.search),
@@ -75,7 +76,6 @@ class _VistaBuscadorState extends State<VistaBuscador> {
                 const Text("filtro 2")
               ],
             ),
-            
             const SizedBox(
               height: 20,
             ),
@@ -91,7 +91,7 @@ class _VistaBuscadorState extends State<VistaBuscador> {
                   itemBuilder: (context, i) {
                     return GestureDetector(
                       onTap: () => Navigator.pushNamed(context, 'datos',
-                          arguments: busqueda![i] ),
+                          arguments: busqueda![i]),
                       child: LibroCard(libro: busqueda![i]),
                     );
                   },
@@ -103,10 +103,4 @@ class _VistaBuscadorState extends State<VistaBuscador> {
       ),
     );
   }
-
- 
-
-
 }
-
-  

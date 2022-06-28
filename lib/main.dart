@@ -1,6 +1,7 @@
 import 'package:bib_digitalapp/buscador.dart';
 import 'package:bib_digitalapp/datos_libros.dart';
 import 'package:bib_digitalapp/historial.dart';
+import 'package:bib_digitalapp/libro_subido.dart';
 import 'package:bib_digitalapp/login.dart';
 import 'package:bib_digitalapp/navegador.dart';
 import 'package:bib_digitalapp/perfil.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      initialRoute: 'detalleReserva',
+      initialRoute: 'editar',
       routes: {
         'buscador': (context) => const VistaBuscador(),
         'navegador': ((context) => const VistaNavegador()),
@@ -54,8 +55,8 @@ class MyApp extends StatelessWidget {
         'editar': ((context) => const editar()),
         'historialWeb': ((context) => const historialWeb()),
         'carga': (context) => const CargaLibros(),
-        'detalleReserva':(context) => const VistaDetalleReserva(),
-        
+        'libroSubido': (context) => const LibroGuardado(),
+        'detalleReserva': (context) => const VistaDetalleReserva(),
       },
     );
   }
