@@ -25,7 +25,7 @@ class VistaDetalleReserva extends StatefulWidget {
 class _VistaDetalleReservaState extends State<VistaDetalleReserva>
  {
   Reserva? reserva;
-  int id = 1;
+  int id = 22;
   String nombre= '';
   String fecha1='';
   String fecha2='';

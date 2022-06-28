@@ -198,11 +198,11 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
   }
 
   Future<void> reservar(Libro libro) async {
-    //mostrar_dialogo();
-    PostReserva postReserva= PostReserva(idLibro: libro.idLibro, duracionHoras: 5, idAlumno: 1);
+    mostrar_dialogo();
+    PostReserva postReserva= PostReserva(idLibro: libro.idLibro, duracionHoras: 5, idAlumno: 2);
     Reserva? reserva = await ReservaService.postReserva(postReserva);
     if(reserva!=null){
-      //Navigator.pop(context);
+      Navigator.pop(context);
       Navigator.pushNamed(context, 'reserva', arguments:reserva);}
     else{
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
