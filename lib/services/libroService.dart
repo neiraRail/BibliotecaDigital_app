@@ -43,6 +43,25 @@ class LibroService {
     }
   }
 
+  static Future<bool> putLibro(Libro libro) async {
+    var client = http.Client();
+    var uri = Uri.http("200.13.5.14:7102",
+        "/api/libro/" + libro.idLibro.toString(), {'q': '{http}'});
+    libro.idLibro = null;
+    var response = await client.put(uri, body: libroToJson(libro), headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    });
+    if (response.statusCode == 204) {
+      return true;
+    } else {
+      print("Hubo algo raro");
+      print(response.reasonPhrase);
+      return false;
+    }
+  }
+
   static Future<List<Libro>?> buscarPalabra(String palabra) async {
     var client = http.Client();
     var uri = Uri.http(
