@@ -24,7 +24,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Libro;
+    final args = ModalRoute.of(context)!.settings.arguments as Libro?;
     return Scaffold(
       appBar: BaseAppBar(
         title: const Text("Datos Libro"),
@@ -55,7 +55,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                         ),
                         Flexible(
                           child: Text(
-                            args.titulo,
+                            args != null ? args.titulo : '',
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         )
@@ -72,14 +72,17 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                           Row(children: [
                             const Text("Autor: ",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
-                            Flexible(child: Text(args.autor)),
+                            Flexible(
+                                child: Text(args != null ? args.autor : '')),
                           ]),
                           Row(
                             children: [
                               const Text("Editorial: ",
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
-                              Flexible(child: Text(args.editorial))
+                              Flexible(
+                                  child:
+                                      Text(args != null ? args.editorial : ''))
                             ],
                           ),
                           Row(
@@ -88,7 +91,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                 "Año: ",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(args.ano.toString()),
+                              Text(args != null ? args.ano.toString() : ''),
                             ],
                           ),
                           Row(
@@ -97,7 +100,8 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                               const Text("Resumen: ",
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
-                              Flexible(child: Text(args.resumen))
+                              Flexible(
+                                  child: Text(args != null ? args.resumen : ''))
                             ],
                           ),
                           Row(
@@ -106,7 +110,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                 "otroTitulo: ",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(args.otroTitulo),
+                              Text(args != null ? args.otroTitulo : ''),
                             ],
                           ),
                           Row(
@@ -115,7 +119,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                 "cdd: ",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(args.cdd)
+                              Text(args != null ? args.cdd : '')
                             ],
                           ),
                           Row(
@@ -124,7 +128,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                 "isbn: ",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(args.isbn)
+                              Text(args != null ? args.isbn : '')
                             ],
                           ),
                           Row(
@@ -133,7 +137,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                 "tipoMaterial: ",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(args.tipoMaterial)
+                              Text(args != null ? args.tipoMaterial : '')
                             ],
                           ),
                         ],
