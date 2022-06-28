@@ -48,9 +48,9 @@ class _VistaDetalleReservaState extends State<VistaDetalleReserva>
     copialibro=reserva!.copiaLibro;
     if (reserva != null) {
       
-      setState(() {
+      
         isLoaded = true;
-      });
+     
     }
   }
 

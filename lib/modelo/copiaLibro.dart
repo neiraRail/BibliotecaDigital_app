@@ -4,8 +4,8 @@ import 'libro.dart';
 List<CopiaLibro> copialibrosFromJson(String str) =>
     List<CopiaLibro>.from(json.decode(str).map((x) => Libro.fromJson(x)));
 
-Libro copiaLibroFromJson(String str) {
-  return Libro.fromJson(jsonDecode(str));
+CopiaLibro copiaLibroFromJson(String str) {
+  return CopiaLibro.fromJson(jsonDecode(str));
 }
 
 String copiaLibroToJson(List<CopiaLibro> data) =>

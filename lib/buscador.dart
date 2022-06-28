@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:bib_digitalapp/libro_card.dart';
 import 'package:bib_digitalapp/modelo/libro.dart';
+import 'package:bib_digitalapp/services/copiaLibroService.dart';
+import 'package:bib_digitalapp/services/libroService.dart';
 import 'package:flutter/material.dart';
 import 'package:bib_digitalapp/libro_card.dart';
 import 'package:http/http.dart' as http;
@@ -20,7 +22,7 @@ class _VistaBuscadorState extends State<VistaBuscador> {
 
   //inicializar controller
 
-  List<Libro> busqueda = [];
+  List<Libro>? busqueda = [];
 
   final busquedaController = TextEditingController();
 
@@ -49,7 +51,7 @@ class _VistaBuscadorState extends State<VistaBuscador> {
                 IconButton(
                   color: Colors.blueAccent,
                   onPressed: () async {
-                    busqueda = await buscarPalabra(busquedaController.text);
+                    busqueda = await LibroService.buscarPalabra(busquedaController.text);
                     setState(() {});
                   },
                   icon: const Icon(Icons.search),
@@ -73,19 +75,7 @@ class _VistaBuscadorState extends State<VistaBuscador> {
                 const Text("filtro 2")
               ],
             ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
-                ),
-                onPressed: () async {
-                  busqueda = await buscarPalabra(busquedaController.text);
-                  setState(() {});
-                },
-                child: const Text("Verde"),
-              ),
-            ),
+            
             const SizedBox(
               height: 20,
             ),
@@ -97,12 +87,12 @@ class _VistaBuscadorState extends State<VistaBuscador> {
                     ),
                     color: Colors.grey),
                 child: ListView.builder(
-                  itemCount: busqueda.length,
+                  itemCount: busqueda!.length,
                   itemBuilder: (context, i) {
                     return GestureDetector(
                       onTap: () => Navigator.pushNamed(context, 'datos',
-                          arguments: busqueda[i]),
-                      child: LibroCard(libro: busqueda[i]),
+                          arguments: busqueda![i] ),
+                      child: LibroCard(libro: busqueda![i]),
                     );
                   },
                 ),
@@ -114,18 +104,9 @@ class _VistaBuscadorState extends State<VistaBuscador> {
     );
   }
 
-  Future<List<Libro>> buscarPalabra(palabra) async {
-    final response = await http.get(Uri.http(
-        "200.13.5.14:7102", "/api/Libro/busqueda/" + palabra, {'q': '{http}'}));
+ 
 
-    if (response.statusCode == 200) {
-      Iterable l = json.decode(response.body);
-      List<Libro> libros =
-          List<Libro>.from(l.map((model) => Libro.fromJson(model)));
 
-      return libros;
-    } else {
-      return [];
-    }
-  }
 }
+
+  

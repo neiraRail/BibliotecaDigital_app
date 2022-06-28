@@ -1,6 +1,7 @@
 import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:bib_digitalapp/libro_card.dart';
 import 'package:bib_digitalapp/modelo/libro.dart';
+import 'package:bib_digitalapp/modelo/reserva.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -8,7 +9,7 @@ import 'package:http/http.dart' as http;
 
 class VistaReservaQR extends StatefulWidget {
   const VistaReservaQR({Key? key}) : super(key: key);
-
+  
   @override
   State<VistaReservaQR> createState() => _VistaReservaQRState();
 }
@@ -17,8 +18,9 @@ class _VistaReservaQRState extends State<VistaReservaQR> {
   
   @override
   Widget build(BuildContext context) {
-     final args = ModalRoute.of(context)!.settings.arguments as Libro;
-     String horaMax = "19:45:00";
+     final reserva = ModalRoute.of(context)!.settings.arguments as Reserva;
+     String horaMax = reserva.fechaLimite.toIso8601String();
+     int id =reserva.idReserva;
     return Scaffold(
       appBar: BaseAppBar(
         title: const Text("QR Reserva"),
@@ -44,7 +46,7 @@ Reserva realizada exitosamente''',
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: QrImage(
-                    data: 'idReserva: 1',
+                    data: id.toString(),
                     version: QrVersions.auto,
                     size: 280),
                 ),
@@ -53,7 +55,7 @@ Reserva realizada exitosamente''',
               Text(horaMax),
 
               LibroCard(
-                libro: args,
+                libro: reserva.copiaLibro.libro,
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(

@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import '../modelo/postReserva.dart';
 import '../modelo/reserva.dart';
 
 class ReservaService {
@@ -43,6 +44,23 @@ class ReservaService {
       return reservasFromJson(json);
     }
     return null;
+  }
+
+  static Future<Reserva?> postReserva(PostReserva postreserva) async {
+    var client = http.Client();
+
+    var uri = Uri.http("200.13.5.14:7102", "/api/reserva/", {'q': '{http}'});
+    var response = await client.post(uri, body: postReservaToJson(postreserva), headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    });
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return reservaFromJson(json);
+    } else {
+      print(response.reasonPhrase);
+    }
   }
 
 }
