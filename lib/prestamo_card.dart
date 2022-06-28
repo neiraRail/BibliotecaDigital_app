@@ -38,77 +38,88 @@ class _PrestamoCardState extends State<PrestamoCard> {
                 children: [
                   Align(
                     alignment: Alignment.center,
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            const Text("Prestamo: ",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Flexible(
-                                child: Text(
-                                    widget.prestamo.idPrestamo.toString())),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Text("Fecha inicio: ",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Flexible(
-                                child: Text(widget.prestamo.fechaInicio
-                                    .toString()
-                                    .split(" ")[0])),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Text("Fecha termino: ",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Flexible(
-                                child: Text(widget.prestamo.fechaTermino
-                                    .toString()
-                                    .split(" ")[0])),
-                          ],
-                        ),
-                        const Divider(),
-                        Row(
-                          children: [
-                            const Text("Libro nro: ",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Flexible(
-                                child: Text(
-                                    widget.prestamo.copiaLibro.idEspecifico.toString())),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Text("Libro nombre: ",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Flexible(child: Text("Copia nro: "+ widget.prestamo.copiaLibro.idEspecifico.toString())),
-                          ],
-                        ),
-                        if (widget.alumno != null) const Divider(),
-                        if (widget.alumno != null)
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
                           Row(
                             children: [
-                              const Text("Alumno nombre: ",
+                              const Text("Prestamo: ",
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
                               Flexible(
-                                  child: Text(widget.alumno!.nombres +
-                                      " " +
-                                      widget.alumno!.apellidos)),
+                                  child: Text(
+                                      widget.prestamo.idPrestamo.toString())),
                             ],
                           ),
-                        if (widget.alumno != null)
                           Row(
                             children: [
-                              const Text("RUN: ",
+                              const Text("Fecha inicio: ",
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
-                              Flexible(child: Text(widget.alumno!.run)),
+                              Flexible(
+                                  child: Text(widget.prestamo.fechaInicio
+                                      .toString()
+                                      .split(" ")[0])),
                             ],
                           ),
-                      ],
+                          Row(
+                            children: [
+                              const Text("Fecha termino: ",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              Flexible(
+                                  child: Text(widget.prestamo.fechaTermino
+                                      .toString()
+                                      .split(" ")[0])),
+                            ],
+                          ),
+                          const Divider(),
+                          Row(
+                            children: [
+                              const Text("Libro nro: ",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              Flexible(
+                                  child: Text(widget
+                                      .prestamo.copiaLibro.idEspecifico
+                                      .toString())),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Text("Libro nombre: ",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              Flexible(
+                                  child: Text("Copia nro: " +
+                                      widget.prestamo.copiaLibro.idEspecifico
+                                          .toString())),
+                            ],
+                          ),
+                          if (widget.alumno != null) const Divider(),
+                          if (widget.alumno != null)
+                            Row(
+                              children: [
+                                const Text("Alumno nombre: ",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Flexible(
+                                    child: Text(widget.alumno!.nombres +
+                                        " " +
+                                        widget.alumno!.apellidos)),
+                              ],
+                            ),
+                          if (widget.alumno != null)
+                            Row(
+                              children: [
+                                const Text("RUN: ",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Flexible(child: Text(widget.alumno!.run)),
+                              ],
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

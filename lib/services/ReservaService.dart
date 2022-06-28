@@ -3,32 +3,26 @@ import '../modelo/postReserva.dart';
 import '../modelo/reserva.dart';
 
 class ReservaService {
- static prestamofromReserva(int id) async {
-  var client = http.Client();
-  var uri = Uri.http("200.13.5.14:7102",
-        "/api/prestamo/" + id.toString(), {'q': '{http}'});
+  static prestamofromReserva(int id) async {
+    var client = http.Client();
+    var uri = Uri.http(
+        "200.13.5.14:7102", "/api/prestamo/" + id.toString(), {'q': '{http}'});
 
-  var response = await client.post(uri, headers: {
+    var response = await client.post(uri, headers: {
       "Content-Type": "application/json",
       "Accept": "application/json"
     });
 
-  if(response.statusCode == 200){
-    return true;
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
   }
-  else{
-    return false;
-  }
- }
 
   static Future<Reserva?> getReservaPorId(int idreserva) async {
     var client = http.Client();
-
-    // final response = await http.get(Uri.http(
-    //     "200.13.5.14:7102", "/api/Libro/busqueda/" + palabra, {'q': '{http}'}));
-
-    // var uri = Uri.parse('http://http://200.13.5.14:7102/api/reserva/');
-    print("ID OCUPADA: "+idreserva.toString());
+    print("ID OCUPADA: " + idreserva.toString());
     var uri = Uri.http("200.13.5.14:7102",
         "/api/reserva/" + idreserva.toString(), {'q': '{http}'});
     var response = await client.get(uri);
@@ -39,14 +33,12 @@ class ReservaService {
     }
     return null;
   }
-   static Future<List<Reserva>?> getReservas(int id) async {
+
+  static Future<List<Reserva>?> getReservas(int id) async {
     var client = http.Client();
 
-    // final response = await http.get(Uri.http(
-    //     "200.13.5.14:7102", "/api/Libro/busqueda/" + palabra, {'q': '{http}'}));
-
-    // var uri = Uri.parse('http://http://200.13.5.14:7102/api/prestamo/');
-    var uri = Uri.http("200.13.5.14:7102", "/api/reserva/"+ id.toString(), {'q': '{http}'});
+    var uri = Uri.http(
+        "200.13.5.14:7102", "/api/reserva/" + id.toString(), {'q': '{http}'});
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var json = response.body;
@@ -59,7 +51,8 @@ class ReservaService {
     var client = http.Client();
 
     var uri = Uri.http("200.13.5.14:7102", "/api/reserva/", {'q': '{http}'});
-    var response = await client.post(uri, body: postReservaToJson(postreserva), headers: {
+    var response =
+        await client.post(uri, body: postReservaToJson(postreserva), headers: {
       "Content-Type": "application/json",
       "Accept": "application/json",
       "Access-Control-Allow-Origin": "*"
@@ -71,5 +64,4 @@ class ReservaService {
       print(response.body);
     }
   }
-
 }

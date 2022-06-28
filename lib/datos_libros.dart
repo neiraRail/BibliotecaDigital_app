@@ -20,7 +20,7 @@ class VistaDatosLibros extends StatefulWidget {
 }
 
 class _VistaDatosLibrosState extends State<VistaDatosLibros> {
-  List<CopiaLibro> copias = [];
+  List<CopiaLibro>? copias;
   bool isDisponible = false;
   bool isLoaded = true;
   //Libro? libro;
@@ -32,7 +32,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
 
   fetchCopias(Libro l) async {
     copias = await CopiaLibroService.buscarCopias(l);
-    if (copias.length > 0) {
+    if (copias!.isNotEmpty) {
       setState(() {
         isDisponible = true;
       });
@@ -42,7 +42,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
   @override
   Widget build(BuildContext context) {
     Libro? libro = ModalRoute.of(context)!.settings.arguments as Libro?;
-    if (libro != null) {
+    if (libro != null && copias == null) {
       fetchCopias(libro);
     }
     return Scaffold(
@@ -131,7 +131,9 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                 "otroTitulo: ",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(libro != null ? libro.otroTitulo : ''),
+                              Flexible(
+                                  child: Text(
+                                      libro != null ? libro.otroTitulo : '')),
                             ],
                           ),
                           Row(
@@ -140,7 +142,8 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                 "cdd: ",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(libro != null ? libro.cdd : '')
+                              Flexible(
+                                  child: Text(libro != null ? libro.cdd : ''))
                             ],
                           ),
                           Row(
@@ -149,7 +152,8 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                 "isbn: ",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(libro != null ? libro.isbn : '')
+                              Flexible(
+                                  child: Text(libro != null ? libro.isbn : ''))
                             ],
                           ),
                           Row(
@@ -158,30 +162,22 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                 "tipoMaterial: ",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(libro != null ? libro.tipoMaterial : '')
+                              Flexible(
+                                  child: Text(
+                                      libro != null ? libro.tipoMaterial : ''))
                             ],
                           ),
-
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 150, vertical: 10),
-                              child: Visibility(
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.green,
-                                      ),
-                                      onPressed: () => reservar(libro!),
-                                      child: Text("Reservar Libro")),
-                                  visible: isDisponible)),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 150, vertical: 10),
-                              child: Visibility(
-                                  child: const ElevatedButton(
-                                      onPressed: null,
-                                      child: Text("no disponible")),
-                                  visible: !isDisponible)),
-                          //FutureBuilder<Libro>(future: futureLibro, builder: ())
+                          Visibility(
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.green,
+                                ),
+                                onPressed: () => reservar(libro!),
+                                child: const Text("Reservar Libro")),
+                            visible: isDisponible,
+                            replacement: const ElevatedButton(
+                                onPressed: null, child: Text("No disponible")),
+                          ),
                         ],
                       ),
                     ),
