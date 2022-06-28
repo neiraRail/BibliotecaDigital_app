@@ -10,8 +10,11 @@ Reserva reservaFromJson(String str) {
   return Reserva.fromJson(jsonDecode(str));
 }
 
-String reservaToJson(List<Reserva> data) =>
+String reservasToJson(List<Reserva> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+String reservaToJson(Reserva data) =>
+    json.encode(data.toJson());
 
 class Reserva {
   Reserva({
