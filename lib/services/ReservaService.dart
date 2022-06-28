@@ -59,7 +59,7 @@ class ReservaService {
       var json = response.body;
       return reservaFromJson(json);
     } else {
-      print(response.reasonPhrase);
+      print(response.body);
     }
   }
 

@@ -23,7 +23,7 @@ class Alumno {
     required this.nombres,
     required this.apellidos,
     required this.email,
-    required this.contrasena,
+     this.contrasena='',
   });
 
   int idAlumno;
@@ -31,7 +31,7 @@ class Alumno {
   String nombres;
   String apellidos;
   String email;
-  String contrasena;
+  String contrasena='';
 
   factory Alumno.fromJson(Map<String, dynamic> json) => Alumno(
         idAlumno: json["idAlumno"],
@@ -39,7 +39,7 @@ class Alumno {
         nombres: json["nombres"],
         apellidos: json["apellidos"],
         email: json["email"],
-        contrasena: json["contrasena"],
+        
       );
 
   Map<String, dynamic> toJson() => {
