@@ -19,13 +19,13 @@ class _VistaNavegadorState extends State<VistaNavegador> {
   @override
   void initState() {
     programmeList = [
-      {'icon': Icons.abc, 'route': 'buscador'},
-      {'icon': Icons.cabin, 'route': 'historial'},
-      {'icon': Icons.dangerous, 'route': 'lector'},
-      {'icon': Icons.e_mobiledata, 'route': 'subidaManual'},
-      {'icon': Icons.face, 'route': 'carga'},
-      {'icon': Icons.account_circle, 'route': 'historialWeb'},
-      {'icon': Icons.cruelty_free, 'route': 'buscadorWeb'},
+      {'icon': Icons.content_paste_search, 'route': 'buscador'},
+      {'icon': Icons.collections_bookmark, 'route': 'historial'},
+      {'icon': Icons.qr_code_scanner, 'route': 'lector'},
+      {'icon': Icons.fiber_new, 'route': 'subidaManual'},
+      {'icon': Icons.cloud_upload_outlined, 'route': 'carga'},
+      {'icon': Icons.history, 'route': 'historialWeb'},
+      {'icon': Icons.manage_search, 'route': 'buscadorWeb'},
       // {'icon': Icons.emoji_nature, 'route': 'editar'},
       // {'icon': Icons.note, 'route': 'historialWeb'}
     ];

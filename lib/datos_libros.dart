@@ -167,13 +167,16 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                                       libro != null ? libro.tipoMaterial : ''))
                             ],
                           ),
+                          SizedBox(height: 15),
                           Visibility(
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.green,
-                                ),
-                                onPressed: () => reservar(libro!),
-                                child: const Text("Reservar Libro")),
+
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(primary: Colors.green),
+                                  onPressed: () => reservar(libro!),
+                                  child: const Text("Reservar Libro")),
+                            ),
                             visible: isDisponible,
                             replacement: const ElevatedButton(
                                 onPressed: null, child: Text("No disponible")),

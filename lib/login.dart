@@ -13,7 +13,7 @@ class _VistaLoginState extends State<VistaLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        title: const Text(
+        title: Text(
           "Login",
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -22,19 +22,19 @@ class _VistaLoginState extends State<VistaLogin> {
         appBar: AppBar(),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
+        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
         child: Container(
-          decoration: const BoxDecoration(
+          decoration:  BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(15),
               ),
               color: Colors.grey),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 80),
+            padding:EdgeInsets.symmetric(vertical: 80),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
+              children: [
                 Text("LOGIN"),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 50),
@@ -54,6 +54,16 @@ class _VistaLoginState extends State<VistaLogin> {
                     ),
                   ),
                 ),
+                
+                Align(
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.green),
+                    onPressed:() => Navigator.pushNamed(context, 'buscador'),
+                    child: 
+                    SizedBox(width: 60, height: 20, child: Text('Aceptar') )
+                  )
+                )
               ],
             ),
           ),

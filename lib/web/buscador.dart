@@ -58,7 +58,7 @@ class _BuscadorWebState extends State<BuscadorWeb> {
                   borderRadius: BorderRadius.all(
                     Radius.circular(15),
                   ),
-                  color: Colors.deepPurple),
+                  color: Colors.blueGrey),
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,

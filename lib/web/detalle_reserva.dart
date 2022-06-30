@@ -40,8 +40,8 @@ class _VistaDetalleReservaState extends State<VistaDetalleReserva> {
     if(reserva!=null){
       print(reservaToJson(reserva!));
       nombre = reserva!.alumno.nombres + " " + reserva!.alumno.apellidos;
-      fecha1 = DateFormat('yyyy-MM-dd - kk:mm').format(reserva!.fechaReserva);
-      fecha2 = DateFormat('yyyy-MM-dd - kk:mm').format(reserva!.fechaLimite);
+      fecha1 = DateFormat('dd-MM-yyyy - kk:mm').format(reserva!.fechaReserva);
+      fecha2 = DateFormat('dd-MM-yyyy - kk:mm').format(reserva!.fechaLimite);
       matricula = reserva!.alumno.run;
       copialibro = reserva!.copiaLibro;
     }else{
@@ -164,13 +164,16 @@ Detalles de la reserva''',
                   const SizedBox(
                     height: 60,
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
-                    ),
+                  Align(
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.green),
                     onPressed: () => aceptar(args),
-                    child: const Text("Aceptar"),
-                  ),
+                    child: 
+                    SizedBox(width: 60, height: 20, child: Text('Aceptar') )
+                  )
+                ),
+                 
                 ],
               ),
             ),

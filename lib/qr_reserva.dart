@@ -3,6 +3,7 @@ import 'package:bib_digitalapp/libro_card.dart';
 import 'package:bib_digitalapp/modelo/libro.dart';
 import 'package:bib_digitalapp/modelo/reserva.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import 'package:http/http.dart' as http;
@@ -19,7 +20,8 @@ class _VistaReservaQRState extends State<VistaReservaQR> {
   @override
   Widget build(BuildContext context) {
      final reserva = ModalRoute.of(context)!.settings.arguments as Reserva;
-     String horaMax = reserva.fechaLimite.toIso8601String();
+    
+     String horaMax = DateFormat('kk:mm').format(reserva!.fechaLimite);
      int id =reserva.idReserva;
     return Scaffold(
       appBar: BaseAppBar(
