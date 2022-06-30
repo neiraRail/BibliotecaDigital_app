@@ -28,7 +28,7 @@ class _VistaHistorialState extends State<VistaHistorial> {
   }
 
   fetchPrestamos() async {
-    prestamos = await PrestamoService.getPrestamosPorAlumno(1);
+    prestamos = await PrestamoService.getPrestamosPorAlumno(2);
 
     prestamosActivos =
         prestamos?.where((element) => element.isPrestado == true).toList();

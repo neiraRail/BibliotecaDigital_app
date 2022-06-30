@@ -33,6 +33,50 @@ class _VistaBuscadorState extends State<VistaBuscador> {
     super.dispose();
   }
 
+  void buscarPalabra(palabra) async {
+    mostrarDialog();
+    var libros = await LibroService.buscarPalabra(palabra);
+    if (libros != null) {
+      busqueda = libros;
+      setState(() {});
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Hubo un error"),
+        backgroundColor: Colors.red,
+      ));
+    }
+    Navigator.pop(context);
+  }
+
+  void mostrarDialog() {
+    showDialog(
+      // The user CANNOT close this dialog  by pressing outsite it
+      barrierDismissible: false,
+      context: context,
+      builder: (_) {
+        return Dialog(
+          // The background color
+          backgroundColor: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                // The loading indicator
+                CircularProgressIndicator(),
+                SizedBox(
+                  height: 15,
+                ),
+                // Some text
+                Text('Cargando...')
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,10 +94,8 @@ class _VistaBuscadorState extends State<VistaBuscador> {
                 ),
                 IconButton(
                   color: Colors.blueAccent,
-                  onPressed: () async {
-                    busqueda = await LibroService.buscarPalabra(
-                        busquedaController.text);
-                    setState(() {});
+                  onPressed: () {
+                    buscarPalabra(busquedaController.text);
                   },
                   icon: const Icon(Icons.search),
                 )

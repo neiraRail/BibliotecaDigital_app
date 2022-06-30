@@ -338,17 +338,16 @@ class _editarState extends State<editar> {
         cdd: cddController.text,
         isbn: isbnController.text,
         tipoMaterial: tipomaterialController.text);
-
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text("Hubo un error"),
+      backgroundColor: Colors.red,
+    ));
     bool success = await LibroService.putLibro(libro);
     if (success) {
       Navigator.pop(context);
       Navigator.pushReplacementNamed(context, 'buscadorWeb');
     } else {
       Navigator.pop(context);
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Hubo un error"),
-        backgroundColor: Colors.red,
-      ));
     }
   }
 }

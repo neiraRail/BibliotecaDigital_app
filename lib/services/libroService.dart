@@ -63,14 +63,18 @@ class LibroService {
   }
 
   static Future<List<Libro>?> buscarPalabra(String palabra) async {
-    var client = http.Client();
-    var uri = Uri.http(
-        "200.13.5.14:7102", "/api/libro/busqueda/" + palabra, {'q': '{http}'});
-    var response = await client.get(uri);
-    if (response.statusCode == 200) {
-      var json = response.body;
-      return librosFromJson(json);
+    try {
+      var client = http.Client();
+      var uri = Uri.http("200.13.5.14:7102", "/api/libro/busqueda/" + palabra,
+          {'q': '{http}'});
+      var response = await client.get(uri);
+      if (response.statusCode == 200) {
+        var json = response.body;
+        return librosFromJson(json);
+      }
+      return null;
+    } catch (e) {
+      return null;
     }
-    return null;
   }
 }

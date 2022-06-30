@@ -9,6 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 import '../modelo/libro.dart';
+import '../services/libroService.dart';
 
 class BuscadorWeb extends StatefulWidget {
   const BuscadorWeb({Key? key}) : super(key: key);
@@ -36,9 +37,8 @@ class _BuscadorWebState extends State<BuscadorWeb> {
               )),
               IconButton(
                 color: Colors.blueAccent,
-                onPressed: () async {
-                  busqueda = await buscarPalabra(busquedaController.text);
-                  setState(() {});
+                onPressed: () {
+                  buscarPalabra(busquedaController.text);
                 },
                 icon: const Icon(Icons.search),
               )
@@ -101,18 +101,47 @@ class _BuscadorWebState extends State<BuscadorWeb> {
     );
   }
 
-  Future<List<Libro>> buscarPalabra(palabra) async {
-    final response = await http.get(Uri.http(
-        "200.13.5.14:7102", "/api/Libro/busqueda/" + palabra, {'q': '{http}'}));
-
-    if (response.statusCode == 200) {
-      Iterable l = json.decode(response.body);
-      List<Libro> libros =
-          List<Libro>.from(l.map((model) => Libro.fromJson(model)));
-
-      return libros;
+  void buscarPalabra(palabra) async {
+    mostrarDialog();
+    var libros = await LibroService.buscarPalabra(palabra);
+    if (libros != null) {
+      busqueda = libros;
+      setState(() {});
     } else {
-      return [];
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Hubo un error"),
+        backgroundColor: Colors.red,
+      ));
     }
+    Navigator.pop(context);
+  }
+
+  void mostrarDialog() {
+    showDialog(
+      // The user CANNOT close this dialog  by pressing outsite it
+      barrierDismissible: false,
+      context: context,
+      builder: (_) {
+        return Dialog(
+          // The background color
+          backgroundColor: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                // The loading indicator
+                CircularProgressIndicator(),
+                SizedBox(
+                  height: 15,
+                ),
+                // Some text
+                Text('Cargando...')
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }

@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      initialRoute: 'buscador',
+      initialRoute: 'historial',
       routes: {
         'buscador': (context) => const VistaBuscador(),
         'navegador': ((context) => const VistaNavegador()),
