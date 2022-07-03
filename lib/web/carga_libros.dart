@@ -13,6 +13,22 @@ class CargaLibros extends StatefulWidget {
 class _CargaLibrosState extends State<CargaLibros> {
   XFile? _file;
 
+  void enviarArchivo(_file) async {
+    try {
+      String? response = await ArchivoService.enviar(_file!);
+      if (response != null) {
+        //Enviar a vista mostrar errores
+      } else {
+        //Enviar a vista todo bien
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(e.toString()),
+        backgroundColor: Colors.red,
+      ));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,14 +83,7 @@ class _CargaLibrosState extends State<CargaLibros> {
                 ),
                 onPressed: _file != null
                     ? () {
-                        try {
-                          ArchivoService.enviar(_file!);
-                        } catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(e.toString()),
-                            backgroundColor: Colors.red,
-                          ));
-                        }
+                        enviarArchivo(_file!);
                       }
                     : null,
                 child: const SizedBox(

@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:cross_file/cross_file.dart';
 
 class ArchivoService {
-  static void enviar(XFile file) async {
+  static Future<String?> enviar(XFile file) async {
     var client = http.Client();
 
     var uri = Uri.http("200.13.5.14:7102", "/api/archivos/", {'q': '{http}'});
@@ -13,12 +13,12 @@ class ArchivoService {
 
     if (res.statusCode == 200) {
       print("[Subit archivo] Todo bien :)");
-      print(await res.stream.bytesToString());
+      return await res.stream.bytesToString();
     } else {
       print(
           "[Subir archivo] El servidor mandó un status code distinto de 200:C --->");
       print(res.statusCode);
-      print(await res.stream.bytesToString());
+      return null;
     }
 
     // var response = await client.post(uri, body: , headers: {
@@ -32,7 +32,5 @@ class ArchivoService {
     // } else {
     //   print(response.body);
     // }
-
-    return null;
   }
 }
