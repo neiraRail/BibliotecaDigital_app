@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:bib_digitalapp/services/libroService.dart';
+import 'package:flutter/widgets.dart';
 
 import '../modelo/libro.dart';
 
@@ -325,8 +326,42 @@ class _subidaManualState extends State<subidaManual> {
 
       Libro? libroGuardado = await LibroService.postLibro(libro);
       clearForm();
-      Navigator.pushReplacementNamed(context, "datos",
-          arguments: libroGuardado);
+      Navigator.pop(context);
+      showDialog(
+        // The user CANNOT close this dialog  by pressing outsite it
+        barrierDismissible: false,
+        context: context,
+        builder: (_) {
+          return Dialog(
+            // The background color
+            //backgroundColor: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children:  [
+                  // The loading indicator
+                  Icon( 
+                    Icons.add_alert, 
+                    color:Colors.green,
+                    size: 40
+                  ),
+                  // Some text
+                  Text('Libro Guardado exitosamente',style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.green)),
+                  SizedBox(height: 20),
+                  SizedBox(
+                    height: 40, width: 100,
+                    child: ElevatedButton(style: ElevatedButton.styleFrom(primary: Colors.green), onPressed: () => Navigator.pushReplacementNamed(context, "datos",
+                            arguments: libroGuardado), child: Text('Aceptar')),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+
+     
+
     } catch (e) {
       clearForm();
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
