@@ -16,10 +16,43 @@ class _CargaLibrosState extends State<CargaLibros> {
   void enviarArchivo(_file) async {
     try {
       String? response = await ArchivoService.enviar(_file!);
-      if (response != null) {
-        //Enviar a vista mostrar errores
+      print(response!.length);
+      if (response=='[""]') {
+        showDialog(context: context, 
+        builder:(_) {
+          return Dialog(
+            // The background color
+            //backgroundColor: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children:  [
+                  // The loading indicator
+                  const Icon( 
+                    Icons.add_alert, 
+                    color:Colors.green,
+                    size: 40
+                  ),
+                  const SizedBox(height: 20),
+                  // Some text
+                  const Text('Libros Guardado exitosamente bien',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green)),
+                  Text(response!),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 40, width: 100,
+                    child: ElevatedButton(style: ElevatedButton.styleFrom(primary: Colors.green), onPressed: () => Navigator.pushReplacementNamed(context, "buscador"), child: const Text('Aceptar')),
+                  )
+                ],
+              ),
+            ),
+          );
+        } );
+        
       } else {
-        //Enviar a vista todo bien
+       
+       
+        //Enviar a vista mostrar errores
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(

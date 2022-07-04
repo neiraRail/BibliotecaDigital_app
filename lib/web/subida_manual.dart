@@ -341,24 +341,26 @@ class _subidaManualState extends State<subidaManual> {
                 mainAxisSize: MainAxisSize.min,
                 children:  [
                   // The loading indicator
-                  Icon( 
+                  const Icon( 
                     Icons.add_alert, 
                     color:Colors.green,
                     size: 40
                   ),
+                  const SizedBox(height: 20),
                   // Some text
-                  Text('Libro Guardado exitosamente',style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.green)),
-                  SizedBox(height: 20),
+                  const Text('Libro Guardado exitosamente',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green)),
+                  const SizedBox(height: 20),
                   SizedBox(
                     height: 40, width: 100,
                     child: ElevatedButton(style: ElevatedButton.styleFrom(primary: Colors.green), onPressed: () => Navigator.pushReplacementNamed(context, "datos",
-                            arguments: libroGuardado), child: Text('Aceptar')),
+                            arguments: libroGuardado), child: const Text('Aceptar')),
                   )
                 ],
               ),
             ),
           );
-        });
+        }
+        );
 
      
 
