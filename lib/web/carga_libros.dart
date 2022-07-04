@@ -15,45 +15,52 @@ class _CargaLibrosState extends State<CargaLibros> {
 
   void enviarArchivo(_file) async {
     try {
+      print("trying....");
       String? response = await ArchivoService.enviar(_file!);
-      print(response!.length);
-      if (response=='[""]') {
-        showDialog(context: context, 
-         barrierDismissible: false,
-        
-        builder:(_) {
-          return Dialog(
-            // The background color
-            //backgroundColor: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children:  [
-                  // The loading indicator
-                  const Icon( 
-                    Icons.add_alert, 
-                    color:Colors.green,
-                    size: 40
+      print("response: " + response!);
+      if (response == '[""]') {
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) {
+              return Dialog(
+                // The background color
+                //backgroundColor: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // The loading indicator
+                      const Icon(Icons.add_alert,
+                          color: Colors.green, size: 40),
+                      const SizedBox(height: 20),
+                      // Some text
+                      const Text('Carga de libros realizada exitosamente',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green)),
+
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        height: 40,
+                        width: 100,
+                        child: ElevatedButton(
+                            style:
+                                ElevatedButton.styleFrom(primary: Colors.green),
+                            onPressed: () => Navigator.pushReplacementNamed(
+                                context, "buscador"),
+                            child: const Text('Aceptar')),
+                      )
+                    ],
                   ),
-                  const SizedBox(height: 20),
-                  // Some text
-                  const Text('Carga de libros realizada exitosamente',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green)),
-                  
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    height: 40, width: 100,
-                    child: ElevatedButton(style: ElevatedButton.styleFrom(primary: Colors.green), onPressed: () => Navigator.pushReplacementNamed(context, "buscador"), child: const Text('Aceptar')),
-                  )
-                ],
-              ),
-            ),
-          );
-        } );
-        
+                ),
+              );
+            });
       } else {
-       
-       
+        List<String> errores = response.split(',');
+        Navigator.pushReplacementNamed(context, 'cargaErrores',
+            arguments: errores);
         //Enviar a vista mostrar errores
       }
     } catch (e) {
@@ -118,6 +125,7 @@ class _CargaLibrosState extends State<CargaLibros> {
                 ),
                 onPressed: _file != null
                     ? () {
+                        print("Enviar archivo...");
                         enviarArchivo(_file!);
                       }
                     : null,

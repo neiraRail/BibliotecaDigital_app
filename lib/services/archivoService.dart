@@ -9,7 +9,8 @@ class ArchivoService {
     var request = http.MultipartRequest('POST', uri);
     request.files.add(await http.MultipartFile.fromPath('file', file.path!));
     request.headers["Access-Control-Allow-Origin"] = "*";
-    var res = await request.send();
+    var res =
+        await request.send().catchError((error) => throw Exception(error));
 
     if (res.statusCode == 200) {
       print("[Subit archivo] Todo bien :)");

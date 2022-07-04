@@ -10,19 +10,18 @@ import 'package:http/http.dart' as http;
 
 class VistaReservaQR extends StatefulWidget {
   const VistaReservaQR({Key? key}) : super(key: key);
-  
+
   @override
   State<VistaReservaQR> createState() => _VistaReservaQRState();
 }
 
 class _VistaReservaQRState extends State<VistaReservaQR> {
-  
   @override
   Widget build(BuildContext context) {
-     final reserva = ModalRoute.of(context)!.settings.arguments as Reserva;
-    
-     String horaMax = DateFormat('kk:mm').format(reserva!.fechaLimite);
-     int id =reserva.idReserva;
+    final reserva = ModalRoute.of(context)!.settings.arguments as Reserva;
+
+    String horaMax = DateFormat('kk:mm').format(reserva.fechaLimite);
+    int id = reserva.idReserva;
     return Scaffold(
       appBar: BaseAppBar(
         title: const Text("QR Reserva"),
@@ -48,14 +47,11 @@ Reserva realizada exitosamente''',
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: QrImage(
-                    data: id.toString(),
-                    version: QrVersions.auto,
-                    size: 280),
+                      data: id.toString(), version: QrVersions.auto, size: 280),
                 ),
               ),
               const Text("Hora máxima para retirar libro: "),
               Text(horaMax),
-
               LibroCard(
                 libro: reserva.copiaLibro.libro,
               ),
