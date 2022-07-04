@@ -19,6 +19,8 @@ class _CargaLibrosState extends State<CargaLibros> {
       print(response!.length);
       if (response=='[""]') {
         showDialog(context: context, 
+         barrierDismissible: false,
+        
         builder:(_) {
           return Dialog(
             // The background color
@@ -36,8 +38,8 @@ class _CargaLibrosState extends State<CargaLibros> {
                   ),
                   const SizedBox(height: 20),
                   // Some text
-                  const Text('Libros Guardado exitosamente bien',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green)),
-                  Text(response!),
+                  const Text('Carga de libros realizada exitosamente',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green)),
+                  
                   const SizedBox(height: 20),
                   SizedBox(
                     height: 40, width: 100,

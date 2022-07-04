@@ -345,7 +345,38 @@ class _editarState extends State<editar> {
     bool success = await LibroService.putLibro(libro);
     if (success) {
       Navigator.pop(context);
-      Navigator.pushReplacementNamed(context, 'buscadorWeb');
+       showDialog(context: context, 
+       barrierDismissible: false,
+        builder:(_) {
+          return Dialog(
+            // The background color
+            //backgroundColor: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children:  [
+                  // The loading indicator
+                  const Icon( 
+                    Icons.edit_note, 
+                    color:Colors.green,
+                    size: 40
+                  ),
+                  const SizedBox(height: 20),
+                  // Some text
+                  const Text('Cambios guadados correctamente',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green)),
+                 
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 40, width: 100,
+                    child: ElevatedButton(style: ElevatedButton.styleFrom(primary: Colors.green), onPressed: () => Navigator.pushReplacementNamed(context, "buscador"), child: const Text('Aceptar')),
+                  )
+                ],
+              ),
+            ),
+          );
+        } );
+      //Navigator.pushReplacementNamed(context, 'buscadorWeb');
     } else {
       Navigator.pop(context);
     }
