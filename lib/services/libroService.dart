@@ -62,6 +62,21 @@ class LibroService {
     }
   }
 
+  static Future<Libro?> deleteLibro(Libro libro) async {
+    var client = http.Client();
+
+    var uri = Uri.http("200.13.5.14:7102",
+        "/api/libro/" + libro.idLibro.toString(), {'q': '{http}'});
+    var response =
+        await client.delete(uri, headers: {"Access-Control-Allow-Origin": "*"});
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return libroFromJson(json);
+    } else {
+      print(response.body);
+    }
+  }
+
   static Future<List<Libro>?> buscarPalabra(String palabra) async {
     try {
       var client = http.Client();

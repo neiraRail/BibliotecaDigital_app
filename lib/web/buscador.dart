@@ -81,15 +81,17 @@ class _BuscadorWebState extends State<BuscadorWeb> {
                             style:
                                 ElevatedButton.styleFrom(primary: Colors.amber),
                           ),
-                          // const SizedBox(
-                          //   width: 20,
-                          // ),
-                          // ElevatedButton(
-                          //   onPressed: () {},
-                          //   child: const Text("Eliminar"),
-                          //   style:
-                          //       ElevatedButton.styleFrom(primary: Colors.red),
-                          // )
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              showDialogEliminar();
+                            },
+                            child: const Text("Eliminar"),
+                            style:
+                                ElevatedButton.styleFrom(primary: Colors.red),
+                          )
                         ]),
                       ));
                 },
@@ -100,6 +102,8 @@ class _BuscadorWebState extends State<BuscadorWeb> {
       ),
     );
   }
+
+  void showDialogEliminar() {}
 
   void buscarPalabra(palabra) async {
     mostrarDialog();

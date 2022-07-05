@@ -8,6 +8,7 @@ import 'package:bib_digitalapp/perfil.dart';
 import 'package:bib_digitalapp/qr_lector.dart';
 import 'package:bib_digitalapp/qr_reserva.dart';
 import 'package:bib_digitalapp/web/buscador.dart';
+import 'package:bib_digitalapp/web/carga_errores.dart';
 import 'package:bib_digitalapp/web/detalle_reserva.dart';
 import 'package:bib_digitalapp/web/editar.dart';
 import 'package:bib_digitalapp/web/historialWeb.dart';
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
         'carga': (context) => const CargaLibros(),
         'libroSubido': (context) => const LibroGuardado(),
         'detalleReserva': (context) => const VistaDetalleReserva(),
+        'cargaErrores': (context) => const CargaErrores(),
       },
     );
   }
