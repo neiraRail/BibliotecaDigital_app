@@ -88,7 +88,7 @@ class _BuscadorWebState extends State<BuscadorWeb> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              showDialogEliminar();
+                              showDialogEliminar(busqueda[i]);
                             },
                             child: const Text("Eliminar"),
                             style:
@@ -105,7 +105,111 @@ class _BuscadorWebState extends State<BuscadorWeb> {
     );
   }
 
-  void showDialogEliminar() {}
+  void showDialogEliminar(Libro libro) {
+    showDialog(
+      // The user CANNOT close this dialog  by pressing outsite it
+      barrierDismissible: true,
+      context: context,
+      builder: (_) {
+        return Dialog(
+          // The background color
+
+          backgroundColor: Colors.redAccent,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Container(
+              width: 100,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // The loading indicator
+                  const Text("¿Está seguro de eliminar este libro?"),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  // Some text
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            eliminarLibro(libro);
+                          },
+                          child: const Text("Si")),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("No"))
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void eliminarLibro(Libro libro) async {
+    mostrarDialog();
+    var response = await LibroService.deleteLibro(libro);
+    if (response == true) {
+      Navigator.pop(context);
+      mostrarDialogExito();
+    } else {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Hubo un error"),
+        backgroundColor: Colors.red,
+      ));
+    }
+  }
+
+  void mostrarDialogExito() {
+    showDialog(
+        // The user CANNOT close this dialog  by pressing outsite it
+        barrierDismissible: false,
+        context: context,
+        builder: (_) {
+          return Dialog(
+            // The background color
+            //backgroundColor: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // The loading indicator
+                  const Icon(Icons.add_alert, color: Colors.green, size: 40),
+                  const SizedBox(height: 20),
+                  // Some text
+                  const Text('Libro eliminado exitosamente',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.green)),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 40,
+                    width: 100,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.green),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          buscarPalabra(busquedaController.text);
+                        },
+                        child: const Text('Aceptar')),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
 
   void buscarPalabra(palabra) async {
     mostrarDialog();
