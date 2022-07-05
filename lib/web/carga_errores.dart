@@ -72,7 +72,7 @@ class CargaErrores extends StatelessWidget {
                           return Container(
                             color: index % 2 == 1
                                 ? Colors.blueGrey
-                                : Color.fromARGB(255, 106, 148, 173),
+                                : const Color.fromARGB(255, 106, 148, 173),
                             child: ListTile(
                               title: Text(errores[index]),
                             ),
