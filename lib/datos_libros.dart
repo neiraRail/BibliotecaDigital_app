@@ -9,6 +9,7 @@ import 'package:bib_digitalapp/services/libroService.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'menu.dart';
 import 'modelo/libro.dart';
 import 'modelo/reserva.dart';
 
@@ -50,6 +51,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
         title: const Text("Datos Libro"),
         appBar: AppBar(),
       ),
+      drawer: Menu( ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
         child: Container(

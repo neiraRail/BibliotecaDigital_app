@@ -1,6 +1,8 @@
 import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:flutter/material.dart';
 
+import '../menu.dart';
+
 class CargaErrores extends StatelessWidget {
   const CargaErrores({Key? key}) : super(key: key);
 
@@ -9,6 +11,7 @@ class CargaErrores extends StatelessWidget {
     final errores = ModalRoute.of(context)!.settings.arguments as List<String>;
     return Scaffold(
       appBar: BaseAppBar(title: const Text("Resultado"), appBar: AppBar()),
+      drawer: Menu( ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
         child: Container(

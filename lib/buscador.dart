@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:bib_digitalapp/libro_card.dart';
+import 'package:bib_digitalapp/menu.dart';
 import 'package:bib_digitalapp/modelo/libro.dart';
 import 'package:bib_digitalapp/services/copiaLibroService.dart';
 import 'package:bib_digitalapp/services/libroService.dart';
@@ -17,8 +18,8 @@ class VistaBuscador extends StatefulWidget {
 }
 
 class _VistaBuscadorState extends State<VistaBuscador> {
-  bool filtro1 = false;
-  bool filtro2 = false;
+  //bool filtro1 = false;
+  //bool filtro2 = false;
 
   //inicializar controller
 
@@ -81,6 +82,7 @@ class _VistaBuscadorState extends State<VistaBuscador> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(title: const Text('Buscador'), appBar: AppBar()),
+      drawer: Menu( ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
         child: Column(
@@ -104,9 +106,9 @@ class _VistaBuscadorState extends State<VistaBuscador> {
             const SizedBox(
               height: 20,
             ),
-            Row(
+            /*Row(
               children: [
-                Checkbox(
+                /Checkbox(
                   value: filtro1,
                   onChanged: (valor) {},
                 ),
@@ -117,7 +119,7 @@ class _VistaBuscadorState extends State<VistaBuscador> {
                 ),
                 const Text("filtro 2")
               ],
-            ),
+            ),*/
             const SizedBox(
               height: 20,
             ),

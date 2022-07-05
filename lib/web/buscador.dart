@@ -8,6 +8,7 @@ import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
+import '../menu.dart';
 import '../modelo/libro.dart';
 import '../services/libroService.dart';
 
@@ -26,6 +27,7 @@ class _BuscadorWebState extends State<BuscadorWeb> {
     return Scaffold(
       appBar: BaseAppBar(
           title: const Text('Buscador de libross'), appBar: AppBar()),
+      drawer: Menu( ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
         child: Column(children: [

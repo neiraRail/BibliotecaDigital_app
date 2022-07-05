@@ -11,6 +11,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
+import '../menu.dart';
 import '../modelo/libro.dart';
 import '../modelo/libro.dart';
 import '../services/ReservaService.dart';
@@ -108,6 +109,7 @@ class _VistaDetalleReservaState extends State<VistaDetalleReserva> {
           title: const Text("Detalles Reserva"),
           appBar: AppBar(),
         ),
+        drawer: Menu( ),
         body: Visibility(
           visible: isLoaded,
           child: Padding(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:desktop_drop/desktop_drop.dart';
+import '../menu.dart';
 import '../services/archivoService.dart';
 import 'package:cross_file/cross_file.dart';
 
@@ -77,6 +78,7 @@ class _CargaLibrosState extends State<CargaLibros> {
       appBar: AppBar(
         title: const Text("Carga de libros"),
       ),
+      drawer: Menu( ),
       body: Column(children: [
         Expanded(
           child: Wrap(

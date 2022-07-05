@@ -23,6 +23,7 @@ class _VistaReservaQRState extends State<VistaReservaQR> {
     String horaMax = DateFormat('kk:mm').format(reserva.fechaLimite);
     int id = reserva.idReserva;
     return Scaffold(
+      drawer: Menu( ),
       appBar: BaseAppBar(
         title: const Text("QR Reserva"),
         appBar: AppBar(),

@@ -1,3 +1,4 @@
+import 'package:bib_digitalapp/bottombar.dart';
 import 'package:bib_digitalapp/buscador.dart';
 import 'package:bib_digitalapp/datos_libros.dart';
 import 'package:bib_digitalapp/historial.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -41,7 +43,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      initialRoute: 'buscadorWeb',
+      
+      initialRoute: 'login',
       routes: {
         'buscador': (context) => const VistaBuscador(),
         'navegador': ((context) => const VistaNavegador()),
@@ -59,6 +62,8 @@ class MyApp extends StatelessWidget {
         'libroSubido': (context) => const LibroGuardado(),
         'detalleReserva': (context) => const VistaDetalleReserva(),
         'cargaErrores': (context) => const CargaErrores(),
+        'bar': ((context) => const botombar()),
+        
       },
     );
   }

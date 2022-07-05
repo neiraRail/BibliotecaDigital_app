@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
+import '../menu.dart';
 import '../modelo/libro.dart';
 import '../services/libroService.dart';
 
@@ -43,6 +44,7 @@ class _editarState extends State<editar> {
 
     return Scaffold(
         appBar: BaseAppBar(title: const Text('Editar libro'), appBar: AppBar()),
+        drawer: Menu( ),
         body: Form(
           key: _formKey,
           child: SingleChildScrollView(

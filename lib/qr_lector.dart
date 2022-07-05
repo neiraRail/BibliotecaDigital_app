@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
+import 'menu.dart';
+
 class VistaLectorQR extends StatefulWidget {
   const VistaLectorQR({Key? key}) : super(key: key);
 
@@ -28,6 +30,7 @@ class _VistaLectorQRState extends State<VistaLectorQR> {
         title: const Text("Lector QR"),
         appBar: AppBar(),
       ),
+      drawer: Menu( ),
       body: Column(
         children: <Widget>[
           Expanded(
