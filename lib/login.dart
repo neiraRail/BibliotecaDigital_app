@@ -65,23 +65,24 @@ class _VistaLoginState extends State<VistaLogin> {
                 ),
                 const Text("LOGIN"),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  padding: const EdgeInsets.symmetric(horizontal: 50),
                   child: TextField(
                     controller: emailController,
                     decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                    ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        labelText: "E-mail"),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 50),
                   child: TextField(
+                    obscureText: true,
                     controller: pswdController,
                     decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                    ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        labelText: "Contraseña"),
                   ),
                 ),
                 Align(
@@ -91,7 +92,6 @@ class _VistaLoginState extends State<VistaLogin> {
                         onPressed: () {
                           login(emailController.text, pswdController.text,
                               dropdownValue);
-                          
                         },
                         child: const SizedBox(
                             width: 60, height: 20, child: Text('Aceptar'))))
@@ -121,19 +121,17 @@ class _VistaLoginState extends State<VistaLogin> {
         throw Exception("No es un tipo de usuario valido");
       }
       //var token = response[0];
-      
-      
-     //variable sglobales
-      GlobalData.idUser =int.parse(response[1]);
-      GlobalData.token  =response[0];
-      GlobalData.type=tipo;
+
+      //variable sglobales
+      GlobalData.idUser = int.parse(response[1]);
+      GlobalData.token = response[0];
+      GlobalData.type = tipo;
       print('token: ' + GlobalData.idUser.toString());
       print('userId: ' + GlobalData.token.toString());
       Navigator.pushReplacementNamed(context, 'buscador');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Hubo un error: " + e.toString()),
-
         backgroundColor: Colors.red,
       ));
     }
