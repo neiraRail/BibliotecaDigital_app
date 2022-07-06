@@ -1,4 +1,6 @@
 import 'package:bib_digitalapp/base_app_bar.dart';
+import 'package:bib_digitalapp/modelo/postLogin.dart';
+import 'package:bib_digitalapp/services/loginService.dart';
 import 'package:flutter/material.dart';
 
 class VistaLogin extends StatefulWidget {
@@ -11,6 +13,7 @@ class VistaLogin extends StatefulWidget {
 class _VistaLoginState extends State<VistaLogin> {
   TextEditingController emailController = TextEditingController();
   TextEditingController pswdController = TextEditingController();
+  String dropdownValue = 'alumno';
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +41,27 @@ class _VistaLoginState extends State<VistaLogin> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                DropdownButton<String>(
+                  value: dropdownValue,
+                  elevation: 16,
+                  style: const TextStyle(color: Colors.deepPurple),
+                  underline: Container(
+                    height: 2,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                    });
+                  },
+                  items: <String>['alumno', 'bibliotecario', 'admin']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
                 const Text("LOGIN"),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 50),
@@ -63,8 +87,11 @@ class _VistaLoginState extends State<VistaLogin> {
                     alignment: Alignment.center,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.green),
-                        onPressed: () =>
-                            Navigator.pushNamed(context, 'buscador'),
+                        onPressed: () {
+                          login(emailController.text, pswdController.text,
+                              dropdownValue);
+                          //Navigator.pushNamed(context, 'buscador');
+                        },
                         child: const SizedBox(
                             width: 60, height: 20, child: Text('Aceptar'))))
               ],
@@ -73,5 +100,26 @@ class _VistaLoginState extends State<VistaLogin> {
         ),
       ),
     );
+  }
+
+  void login(String email, String pswd, String tipo) async {
+    try {
+      PostLogin credenciales = PostLogin(email: email, contrasena: pswd);
+      var response;
+      if (tipo == 'alumno') {
+        response = await LoginService.loginAlumno(credenciales);
+      } else if (tipo == 'bibliotecario') {
+        response = await LoginService.loginBibliotecario(credenciales);
+      } else if (tipo == 'admin') {
+        response = await LoginService.loginAdmin(credenciales);
+      } else {
+        throw Exception("No es un tipo de usuario valido");
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Hubo un error: " + e.toString()),
+        backgroundColor: Colors.red,
+      ));
+    }
   }
 }
