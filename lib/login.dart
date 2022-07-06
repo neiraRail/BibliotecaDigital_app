@@ -115,6 +115,11 @@ class _VistaLoginState extends State<VistaLogin> {
       } else {
         throw Exception("No es un tipo de usuario valido");
       }
+      var token = response[0];
+      var userId = response[1];
+      print('token: ' + token);
+      print('userId: ' + userId);
+      Navigator.pushReplacementNamed(context, 'buscador');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Hubo un error: " + e.toString()),

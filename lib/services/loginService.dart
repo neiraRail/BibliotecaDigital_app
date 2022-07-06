@@ -15,15 +15,16 @@ class LoginService {
       "Access-Control-Allow-Origin": "*"
     });
     if (response.statusCode == 200) {
-      var json = response.body;
-      return jsonDecode(json);
+      Iterable l = jsonDecode(response.body);
+      List<String> valores =
+          List<String>.from(l.map((model) => model.toString()));
+      return valores;
     } else {
       throw Exception(response.body);
     }
   }
 
-  static Future<List<String>?> loginBibliotecario(
-      PostLogin credenciales) async {
+  static Future<List<String>> loginBibliotecario(PostLogin credenciales) async {
     var client = http.Client();
     var uri = Uri.http(
         "200.13.5.14:7102", "/api/auth/loginbibliotecario", {'q': '{http}'});
@@ -34,8 +35,10 @@ class LoginService {
       "Access-Control-Allow-Origin": "*"
     });
     if (response.statusCode == 200) {
-      var json = response.body;
-      return jsonDecode(json);
+      Iterable l = jsonDecode(response.body);
+      List<String> valores =
+          List<String>.from(l.map((model) => model.toString()));
+      return valores;
     } else {
       throw Exception(response.body);
     }
@@ -52,8 +55,10 @@ class LoginService {
       "Access-Control-Allow-Origin": "*"
     });
     if (response.statusCode == 200) {
-      var json = response.body;
-      return jsonDecode(json);
+      Iterable l = jsonDecode(response.body);
+      List<String> valores =
+          List<String>.from(l.map((model) => model.toString()));
+      return valores;
     } else {
       throw Exception(response.body);
     }
