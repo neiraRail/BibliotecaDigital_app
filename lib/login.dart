@@ -1,4 +1,5 @@
 import 'package:bib_digitalapp/base_app_bar.dart';
+import 'package:bib_digitalapp/modelo/globalData.dart';
 import 'package:bib_digitalapp/modelo/postLogin.dart';
 import 'package:bib_digitalapp/services/loginService.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +91,7 @@ class _VistaLoginState extends State<VistaLogin> {
                         onPressed: () {
                           login(emailController.text, pswdController.text,
                               dropdownValue);
-                          //Navigator.pushNamed(context, 'buscador');
+                          
                         },
                         child: const SizedBox(
                             width: 60, height: 20, child: Text('Aceptar'))))
@@ -104,10 +105,14 @@ class _VistaLoginState extends State<VistaLogin> {
 
   void login(String email, String pswd, String tipo) async {
     try {
+      print('hola');
       PostLogin credenciales = PostLogin(email: email, contrasena: pswd);
       var response;
       if (tipo == 'alumno') {
+        print('es alumno');
         response = await LoginService.loginAlumno(credenciales);
+        print('envia solicitud');
+        Navigator.pushNamed(context, 'buscador');
       } else if (tipo == 'bibliotecario') {
         response = await LoginService.loginBibliotecario(credenciales);
       } else if (tipo == 'admin') {
@@ -115,14 +120,19 @@ class _VistaLoginState extends State<VistaLogin> {
       } else {
         throw Exception("No es un tipo de usuario valido");
       }
-      var token = response[0];
-      var userId = response[1];
-      print('token: ' + token);
-      print('userId: ' + userId);
+      //var token = response[0];
+      //var userId = response[1];
+     //variable sglobales
+      GlobalData.idUser =response[1];
+      GlobalData.token  =response[0];
+      GlobalData.type=tipo;
+      print('token: ' + GlobalData.idUser.toString());
+      print('userId: ' + GlobalData.token.toString());
       Navigator.pushReplacementNamed(context, 'buscador');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Hubo un error: " + e.toString()),
+
         backgroundColor: Colors.red,
       ));
     }
