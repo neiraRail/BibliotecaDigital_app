@@ -1,5 +1,6 @@
 import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:bib_digitalapp/libro_card.dart';
+import 'package:bib_digitalapp/modelo/globalData.dart';
 import 'package:bib_digitalapp/modelo/libro.dart';
 import 'package:bib_digitalapp/prestamo_card.dart';
 import 'package:bib_digitalapp/services/prestamoService.dart';
@@ -20,7 +21,8 @@ class _VistaHistorialState extends State<VistaHistorial> {
   List<Prestamo>? prestamos;
   List<Prestamo>? prestamosActivos;
   List<Prestamo>? prestamosAntiguos;
-
+  //int id =2;
+  int id=GlobalData.idUser;
   @override
   void initState() {
     super.initState();
@@ -29,7 +31,7 @@ class _VistaHistorialState extends State<VistaHistorial> {
   }
 
   fetchPrestamos() async {
-    prestamos = await PrestamoService.getPrestamosPorAlumno(2);
+    prestamos = await PrestamoService.getPrestamosPorAlumno(id);
 
     prestamosActivos =
         prestamos?.where((element) => element.isPrestado == true).toList();

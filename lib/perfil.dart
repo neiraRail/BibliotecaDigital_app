@@ -1,6 +1,8 @@
 import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:flutter/material.dart';
 
+import 'modelo/globalData.dart';
+
 class VistaPerfil extends StatefulWidget {
   const VistaPerfil({Key? key}) : super(key: key);
 
@@ -9,6 +11,7 @@ class VistaPerfil extends StatefulWidget {
 }
 
 class _VistaPerfilState extends State<VistaPerfil> {
+  var idUsuario =GlobalData.idUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

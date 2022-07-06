@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:bib_digitalapp/modelo/copiaLibro.dart';
+import 'package:bib_digitalapp/modelo/globalData.dart';
 import 'package:bib_digitalapp/modelo/postReserva.dart';
 import 'package:bib_digitalapp/services/ReservaService.dart';
 import 'package:bib_digitalapp/services/copiaLibroService.dart';
@@ -24,6 +25,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
   List<CopiaLibro>? copias;
   bool isDisponible = false;
   bool isLoaded = true;
+  var idUsuario =GlobalData.idUser;
   //Libro? libro;
 
   @override
@@ -199,7 +201,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
   Future<void> reservar(Libro libro) async {
     mostrar_dialogo();
     PostReserva postReserva =
-        PostReserva(idLibro: libro.idLibro!, duracionHoras: 5, idAlumno: 2);
+        PostReserva(idLibro: libro.idLibro!, duracionHoras: 5, idAlumno: idUsuario);
     Reserva? reserva = await ReservaService.postReserva(postReserva);
     if (reserva != null) {
       Navigator.pop(context);

@@ -9,6 +9,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:http/http.dart' as http;
 
 import 'menu.dart';
+import 'modelo/globalData.dart';
 
 class VistaReservaQR extends StatefulWidget {
   const VistaReservaQR({Key? key}) : super(key: key);
@@ -24,6 +25,7 @@ class _VistaReservaQRState extends State<VistaReservaQR> {
 
     String horaMax = DateFormat('kk:mm').format(reserva.fechaLimite);
     int id = reserva.idReserva;
+    var idUsuario =GlobalData.idUser;
     return Scaffold(
       drawer: Menu(),
       appBar: BaseAppBar(

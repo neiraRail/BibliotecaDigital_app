@@ -121,9 +121,10 @@ class _VistaLoginState extends State<VistaLogin> {
         throw Exception("No es un tipo de usuario valido");
       }
       //var token = response[0];
-      //var userId = response[1];
+      
+      
      //variable sglobales
-      GlobalData.idUser =response[1];
+      GlobalData.idUser =int.parse(response[1]);
       GlobalData.token  =response[0];
       GlobalData.type=tipo;
       print('token: ' + GlobalData.idUser.toString());
