@@ -9,11 +9,14 @@ class VistaLogin extends StatefulWidget {
 }
 
 class _VistaLoginState extends State<VistaLogin> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController pswdController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        title: Text(
+        title: const Text(
           "Login",
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -22,48 +25,48 @@ class _VistaLoginState extends State<VistaLogin> {
         appBar: AppBar(),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
         child: Container(
-          decoration:  BoxDecoration(
+          decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(15),
               ),
               color: Colors.grey),
           child: Padding(
-            padding:EdgeInsets.symmetric(vertical: 80),
+            padding: const EdgeInsets.symmetric(vertical: 80),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("LOGIN"),
+                const Text("LOGIN"),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 50),
                   child: TextField(
-                    decoration: InputDecoration(
+                    controller: emailController,
+                    decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  padding: const EdgeInsets.symmetric(horizontal: 50),
                   child: TextField(
-                    decoration: InputDecoration(
+                    controller: pswdController,
+                    decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
                     ),
                   ),
                 ),
-                
                 Align(
-                  alignment: Alignment.center,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.green),
-                    onPressed:() => Navigator.pushNamed(context, 'buscador'),
-                    child: 
-                    SizedBox(width: 60, height: 20, child: Text('Aceptar') )
-                  )
-                )
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.green),
+                        onPressed: () =>
+                            Navigator.pushNamed(context, 'buscador'),
+                        child: const SizedBox(
+                            width: 60, height: 20, child: Text('Aceptar'))))
               ],
             ),
           ),
