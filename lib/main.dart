@@ -1,4 +1,3 @@
-
 import 'package:bib_digitalapp/buscador.dart';
 import 'package:bib_digitalapp/datos_libros.dart';
 import 'package:bib_digitalapp/historial.dart';
@@ -13,6 +12,7 @@ import 'package:bib_digitalapp/web/carga_errores.dart';
 import 'package:bib_digitalapp/web/detalle_reserva.dart';
 import 'package:bib_digitalapp/web/editar.dart';
 import 'package:bib_digitalapp/web/historialWeb.dart';
+import 'package:bib_digitalapp/web/login.dart';
 import 'package:bib_digitalapp/web/subida_manual.dart';
 import 'package:bib_digitalapp/web/carga_libros.dart';
 
@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -43,14 +42,13 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      
-      initialRoute: 'login',
+      initialRoute: 'loginWeb',
       routes: {
         'buscador': (context) => const VistaBuscador(),
         'navegador': ((context) => const VistaNavegador()),
         'historial': ((context) => const VistaHistorial()),
         'lector': (context) => const VistaLectorQR(),
-        'login': (context) => const VistaLogin(),
+        'loginWeb': (context) => const VistaLoginWeb(),
         'datos': (context) => const VistaDatosLibros(),
         'reserva': (context) => const VistaReservaQR(),
         'perfil': (context) => const VistaPerfil(),
@@ -62,8 +60,6 @@ class MyApp extends StatelessWidget {
         'libroSubido': (context) => const LibroGuardado(),
         'detalleReserva': (context) => const VistaDetalleReserva(),
         'cargaErrores': (context) => const CargaErrores(),
-        
-        
       },
     );
   }

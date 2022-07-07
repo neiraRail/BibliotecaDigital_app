@@ -4,17 +4,17 @@ import 'package:bib_digitalapp/modelo/postLogin.dart';
 import 'package:bib_digitalapp/services/loginService.dart';
 import 'package:flutter/material.dart';
 
-class VistaLogin extends StatefulWidget {
-  const VistaLogin({Key? key}) : super(key: key);
+class VistaLoginWeb extends StatefulWidget {
+  const VistaLoginWeb({Key? key}) : super(key: key);
 
   @override
-  State<VistaLogin> createState() => _VistaLoginState();
+  State<VistaLoginWeb> createState() => _VistaLoginWebState();
 }
 
-class _VistaLoginState extends State<VistaLogin> {
+class _VistaLoginWebState extends State<VistaLoginWeb> {
   TextEditingController emailController = TextEditingController();
   TextEditingController pswdController = TextEditingController();
-  String dropdownValue = 'alumno';
+  String dropdownValue = 'bibliotecario';
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class _VistaLoginState extends State<VistaLogin> {
                       dropdownValue = newValue!;
                     });
                   },
-                  items: <String>['alumno', 'bibliotecario', 'admin']
+                  items: <String>['bibliotecario', 'admin']
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -109,11 +109,7 @@ class _VistaLoginState extends State<VistaLogin> {
       print('hola');
       PostLogin credenciales = PostLogin(email: email, contrasena: pswd);
       var response;
-      if (tipo == 'alumno') {
-        print('es alumno');
-        response = await LoginService.loginAlumno(credenciales);
-        print('envia solicitud');
-      } else if (tipo == 'bibliotecario') {
+      if (tipo == 'bibliotecario') {
         response = await LoginService.loginBibliotecario(credenciales);
       } else if (tipo == 'admin') {
         response = await LoginService.loginAdmin(credenciales);
