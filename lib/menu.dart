@@ -149,41 +149,8 @@ class Menu extends StatelessWidget  {
 
               },
             ),
-             ListTile(
-              title: const Text('Agregar un libro'),
-              leading: Icon(Icons.fiber_new),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, 'subidaManual');
-
-              },
-            ),
-             ListTile(
-              title: const Text('Carga masiva'),
-              leading: Icon(Icons.cloud_upload_outlined),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, 'carga');
-
-              },
-            ),
-              ListTile(
-              title: const Text('Historial de Pedidos'),
-              leading: Icon(Icons.history ),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, 'historialWeb');
-
-              },
-            ),  ListTile(
-              title: const Text('Buscador'),
-              leading: Icon(Icons.manage_search),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, 'buscadorWeb');
-
-              },
-            ),
+            
+              
           ],
         ));
     }else{

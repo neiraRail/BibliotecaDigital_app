@@ -1,20 +1,14 @@
 
-import 'package:bib_digitalapp/buscador.dart';
-import 'package:bib_digitalapp/datos_libros.dart';
-import 'package:bib_digitalapp/historial.dart';
+import 'package:bib_digitalapp/alumno/buscador.dart';
+import 'package:bib_digitalapp/alumno/datos_libros.dart';
+import 'package:bib_digitalapp/alumno/historial.dart';
 import 'package:bib_digitalapp/libro_subido.dart';
 import 'package:bib_digitalapp/login.dart';
-import 'package:bib_digitalapp/navegador.dart';
-import 'package:bib_digitalapp/perfil.dart';
-import 'package:bib_digitalapp/qr_lector.dart';
-import 'package:bib_digitalapp/qr_reserva.dart';
-import 'package:bib_digitalapp/web/buscador.dart';
-import 'package:bib_digitalapp/web/carga_errores.dart';
-import 'package:bib_digitalapp/web/detalle_reserva.dart';
-import 'package:bib_digitalapp/web/editar.dart';
-import 'package:bib_digitalapp/web/historialWeb.dart';
-import 'package:bib_digitalapp/web/subida_manual.dart';
-import 'package:bib_digitalapp/web/carga_libros.dart';
+import 'package:bib_digitalapp/alumno/perfil.dart';
+import 'package:bib_digitalapp/bibliotecario/qr_lector.dart';
+import 'package:bib_digitalapp/alumno/qr_reserva.dart';
+import 'package:bib_digitalapp/bibliotecario/detalle_reserva.dart';
+
 
 import 'package:flutter/material.dart';
 
@@ -46,24 +40,15 @@ class MyApp extends StatelessWidget {
       
       initialRoute: 'login',
       routes: {
+         'login': (context) => const VistaLogin(),
         'buscador': (context) => const VistaBuscador(),
-        'navegador': ((context) => const VistaNavegador()),
         'historial': ((context) => const VistaHistorial()),
-        'lector': (context) => const VistaLectorQR(),
-        'login': (context) => const VistaLogin(),
         'datos': (context) => const VistaDatosLibros(),
         'reserva': (context) => const VistaReservaQR(),
         'perfil': (context) => const VistaPerfil(),
-        'buscadorWeb': ((context) => const BuscadorWeb()),
-        'subidaManual': ((context) => const subidaManual()),
-        'editar': ((context) => const editar()),
-        'historialWeb': ((context) => const historialWeb()),
-        'carga': (context) => const CargaLibros(),
         'libroSubido': (context) => const LibroGuardado(),
+        'lector': (context) => const VistaLectorQR(),
         'detalleReserva': (context) => const VistaDetalleReserva(),
-        'cargaErrores': (context) => const CargaErrores(),
-        
-        
       },
     );
   }

@@ -1,7 +1,7 @@
 import 'package:bib_digitalapp/base_app_bar.dart';
 import 'package:flutter/material.dart';
 
-import 'modelo/globalData.dart';
+import '../modelo/globalData.dart';
 
 class VistaPerfil extends StatefulWidget {
   const VistaPerfil({Key? key}) : super(key: key);

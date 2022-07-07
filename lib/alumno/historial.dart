@@ -6,8 +6,8 @@ import 'package:bib_digitalapp/prestamo_card.dart';
 import 'package:bib_digitalapp/services/prestamoService.dart';
 import 'package:flutter/material.dart';
 
-import 'menu.dart';
-import 'modelo/prestamo.dart';
+import '../menu.dart';
+import '../modelo/prestamo.dart';
 
 class VistaHistorial extends StatefulWidget {
   const VistaHistorial({Key? key}) : super(key: key);

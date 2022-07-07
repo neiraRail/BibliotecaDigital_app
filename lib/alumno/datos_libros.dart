@@ -10,9 +10,9 @@ import 'package:bib_digitalapp/services/libroService.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'menu.dart';
-import 'modelo/libro.dart';
-import 'modelo/reserva.dart';
+import '../menu.dart';
+import '../modelo/libro.dart';
+import '../modelo/reserva.dart';
 
 class VistaDatosLibros extends StatefulWidget {
   const VistaDatosLibros({Key? key}) : super(key: key);

@@ -105,16 +105,17 @@ class _VistaLoginState extends State<VistaLogin> {
 
   void login(String email, String pswd, String tipo) async {
     try {
-      print('hola');
+      
       PostLogin credenciales = PostLogin(email: email, contrasena: pswd);
       var response;
       if (tipo == 'alumno') {
-        print('es alumno');
+        
         response = await LoginService.loginAlumno(credenciales);
-        print('envia solicitud');
+        //print('envia solicitud');
         Navigator.pushNamed(context, 'buscador');
       } else if (tipo == 'bibliotecario') {
         response = await LoginService.loginBibliotecario(credenciales);
+        Navigator.pushNamed(context, 'lector');
       } else if (tipo == 'admin') {
         response = await LoginService.loginAdmin(credenciales);
       } else {
