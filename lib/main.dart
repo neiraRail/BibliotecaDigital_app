@@ -41,12 +41,14 @@ class MyApp extends StatelessWidget {
       initialRoute: 'login',
       routes: {
          'login': (context) => const VistaLogin(),
+         
         'buscador': (context) => const VistaBuscador(),
         'historial': ((context) => const VistaHistorial()),
         'datos': (context) => const VistaDatosLibros(),
         'reserva': (context) => const VistaReservaQR(),
         'perfil': (context) => const VistaPerfil(),
         'libroSubido': (context) => const LibroGuardado(),
+
         'lector': (context) => const VistaLectorQR(),
         'detalleReserva': (context) => const VistaDetalleReserva(),
       },
