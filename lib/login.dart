@@ -104,6 +104,7 @@ class _VistaLoginState extends State<VistaLogin> {
   }
 
   void login(String email, String pswd, String tipo) async {
+    mostrarDialog();
     try {
       print('hola');
       PostLogin credenciales = PostLogin(email: email, contrasena: pswd);
@@ -128,12 +129,43 @@ class _VistaLoginState extends State<VistaLogin> {
       GlobalData.type = tipo;
       print('token: ' + GlobalData.idUser.toString());
       print('userId: ' + GlobalData.token.toString());
+      Navigator.pop(context);
       Navigator.pushReplacementNamed(context, 'buscador');
     } catch (e) {
+      Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Hubo un error: " + e.toString()),
         backgroundColor: Colors.red,
       ));
     }
+  }
+
+  void mostrarDialog() {
+    showDialog(
+      // The user CANNOT close this dialog  by pressing outsite it
+      barrierDismissible: false,
+      context: context,
+      builder: (_) {
+        return Dialog(
+          // The background color
+          backgroundColor: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                // The loading indicator
+                CircularProgressIndicator(),
+                SizedBox(
+                  height: 15,
+                ),
+                // Some text
+                Text('Cargando...')
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }
