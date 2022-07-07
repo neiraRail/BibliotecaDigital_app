@@ -61,7 +61,9 @@ class ReservaService {
     var response =
         await client.post(uri, body: postReservaToJson(postreserva), headers: {
       'Authorization': 'Bearer ' + GlobalData.token.toString(),
-      "Access-Control-Allow-Origin": "*"
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
     });
     if (response.statusCode == 200) {
       var json = response.body;
