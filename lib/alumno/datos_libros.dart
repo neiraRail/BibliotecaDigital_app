@@ -201,7 +201,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
   Future<void> reservar(Libro libro) async {
     mostrar_dialogo();
     PostReserva postReserva =
-        PostReserva(idLibro: libro.idLibro!, duracionHoras: 5, idAlumno: idUsuario);
+        PostReserva(idLibro: libro.idLibro!, duracionHoras: 5, idAlumno: GlobalData.idUser);
     Reserva? reserva = await ReservaService.postReserva(postReserva);
     if (reserva != null) {
       Navigator.pop(context);

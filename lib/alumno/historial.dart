@@ -22,7 +22,7 @@ class _VistaHistorialState extends State<VistaHistorial> {
   List<Prestamo>? prestamosActivos;
   List<Prestamo>? prestamosAntiguos;
   //int id =2;
-  int id=GlobalData.idUser;
+  int id =GlobalData.idUser;
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,7 @@ class _VistaHistorialState extends State<VistaHistorial> {
   }
 
   fetchPrestamos() async {
-    prestamos = await PrestamoService.getPrestamosPorAlumno(id);
+    prestamos = await PrestamoService.getPrestamosPorAlumno(GlobalData.idUser);
 
     prestamosActivos =
         prestamos?.where((element) => element.isPrestado == true).toList();
