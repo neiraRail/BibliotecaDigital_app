@@ -374,7 +374,7 @@ class _editarState extends State<editar> {
                           style:
                               ElevatedButton.styleFrom(primary: Colors.green),
                           onPressed: () => Navigator.pushReplacementNamed(
-                              context, "buscador"),
+                              context, "buscadorWeb"),
                           child: const Text('Aceptar')),
                     )
                   ],

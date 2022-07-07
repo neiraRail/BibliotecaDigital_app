@@ -19,7 +19,7 @@ class _CargaLibrosState extends State<CargaLibros> {
       print("trying....");
       String? response = await ArchivoService.enviar(_file!);
       print("response: " + response!);
-      if (response == '[""]') {
+      if (response =="[]") {
         showDialog(
             context: context,
             barrierDismissible: false,
@@ -50,7 +50,7 @@ class _CargaLibrosState extends State<CargaLibros> {
                             style:
                                 ElevatedButton.styleFrom(primary: Colors.green),
                             onPressed: () => Navigator.pushReplacementNamed(
-                                context, "buscador"),
+                                context, "buscadorWeb"),
                             child: const Text('Aceptar')),
                       )
                     ],
