@@ -16,6 +16,7 @@ class _VistaLectorQRState extends State<VistaLectorQR> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
   QRViewController? controller;
+  bool escaneado = false;
 
   @override
   void reassemble() {
@@ -23,6 +24,11 @@ class _VistaLectorQRState extends State<VistaLectorQR> {
     controller!.pauseCamera();
   }
 
+  @override
+  void initState() {
+    super.initState();
+    escaneado = false;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,8 +64,14 @@ class _VistaLectorQRState extends State<VistaLectorQR> {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       setState(() {
-        result = scanData;
-        Navigator.pushNamed(context, 'detalleReserva', arguments: int.parse(result!.code!));
+        print("Escaneado!!");
+        if(!escaneado) {
+          escaneado = true;
+          result = scanData;
+          print("Result: "+result.toString());
+          Navigator.pushNamed(context, 'detalleReserva',
+              arguments: int.parse(result!.code!));
+        }
       });
     });
   }

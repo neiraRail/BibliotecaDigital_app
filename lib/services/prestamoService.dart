@@ -19,6 +19,8 @@ class PrestamoService {
     if (response.statusCode == 200) {
       var json = response.body;
       return prestamoFromJson(json);
+    }else{
+      throw Exception(response.body);
     }
     return null;
   }
@@ -38,6 +40,8 @@ class PrestamoService {
     if (response.statusCode == 200) {
       var json = response.body;
       return prestamoFromJson(json);
+    }else{
+      throw Exception(response.body);
     }
     return null;
   }

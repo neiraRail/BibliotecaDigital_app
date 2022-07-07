@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bib_digitalapp">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="bib_digitalapp"
         android:name="${applicationName}"

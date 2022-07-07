@@ -35,6 +35,13 @@ class ReservaService {
       var json = response.body;
       return reservaFromJson(json);
     }
+    else if(response.statusCode == 404){
+      throw Exception("No encontrada");
+    }else{
+      print(response.statusCode);
+      print(response.body);
+      throw Exception(response.statusCode);
+    }
     return null;
   }
 

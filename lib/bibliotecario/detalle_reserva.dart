@@ -30,32 +30,44 @@ class _VistaDetalleReservaState extends State<VistaDetalleReserva> {
   String matricula = '';
   CopiaLibro? copialibro;
   bool isLoaded = false;
+  bool fetched = false;
 
   @override
   void initState() {
     super.initState();
+    fetched = false;
   }
 
   fetchReserva(int numero) async {
-    reserva = await ReservaService.getReservaPorId(numero);
-    if(reserva!=null){
-      print(reservaToJson(reserva!));
-      nombre = reserva!.alumno.nombres + " " + reserva!.alumno.apellidos;
-      fecha1 = DateFormat('dd-MM-yyyy - kk:mm').format(reserva!.fechaReserva);
-      fecha2 = DateFormat('dd-MM-yyyy - kk:mm').format(reserva!.fechaLimite);
-      matricula = reserva!.alumno.run;
-      copialibro = reserva!.copiaLibro;
-    }else{
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Hubo un error"),
+    try{
+      print("Intentando get reserva por id");
+      reserva = await ReservaService.getReservaPorId(numero);
+      if (reserva != null) {
+        print(reservaToJson(reserva!));
+        nombre = reserva!.alumno.nombres + " " + reserva!.alumno.apellidos;
+        fecha1 = DateFormat('dd-MM-yyyy - kk:mm').format(reserva!.fechaReserva);
+        fecha2 = DateFormat('dd-MM-yyyy - kk:mm').format(reserva!.fechaLimite);
+        matricula = reserva!.alumno.run;
+        copialibro = reserva!.copiaLibro;
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Hubo un error: Reserva no encontrada"),
+          backgroundColor: Colors.red,
+        ));
+        Navigator.pushReplacementNamed(context, 'buscador');
+      }
+
+      if (reserva != null) {
+        setState(() {
+          isLoaded = true;
+        });
+      }
+    }
+    catch(e){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Hubo un error: "+e.toString()),
         backgroundColor: Colors.red,
       ));
-    }
-
-    if (reserva != null) {
-      setState(() {
-        isLoaded = true;
-      });
     }
   }
 
@@ -90,7 +102,7 @@ class _VistaDetalleReservaState extends State<VistaDetalleReserva> {
     var success = await ReservaService.prestamofromReserva(id);
     Navigator.pop(context);
     if(success){
-      Navigator.pushNamed(context, 'buscador');
+      Navigator.pushReplacementNamed(context, 'buscador');
     }else{
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Hubo un error"),
@@ -103,7 +115,10 @@ class _VistaDetalleReservaState extends State<VistaDetalleReserva> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as int;
-    fetchReserva(args);
+    if(!fetched) {
+      fetched = true;
+      fetchReserva(args);
+    }
     return Scaffold(
         appBar: BaseAppBar(
           title: const Text("Detalles Reserva"),
@@ -126,7 +141,7 @@ class _VistaDetalleReservaState extends State<VistaDetalleReserva> {
                     alignment: Alignment.centerRight,
                     child: IconButton(
                         color: Colors.black,
-                        onPressed: () => Navigator.pushNamed(context, 'lector'),
+                        onPressed: () => Navigator.pushReplacementNamed(context, 'lector'),
                         icon: const Icon(Icons.close)),
                   ),
                   const Text(
@@ -171,11 +186,11 @@ Detalles de la reserva''',
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.green),
                     onPressed: () => aceptar(args),
-                    child: 
+                    child:
                     SizedBox(width: 60, height: 20, child: Text('Aceptar') )
                   )
                 ),
-                 
+
                 ],
               ),
             ),
