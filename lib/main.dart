@@ -1,4 +1,4 @@
-import 'package:bib_digitalapp/bottombar.dart';
+
 import 'package:bib_digitalapp/buscador.dart';
 import 'package:bib_digitalapp/datos_libros.dart';
 import 'package:bib_digitalapp/historial.dart';
@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
         'libroSubido': (context) => const LibroGuardado(),
         'detalleReserva': (context) => const VistaDetalleReserva(),
         'cargaErrores': (context) => const CargaErrores(),
-        'bar': ((context) => const botombar()),
+        
         
       },
     );

@@ -1,4 +1,5 @@
 import 'package:bib_digitalapp/base_app_bar.dart';
+import 'package:bib_digitalapp/modelo/globalData.dart';
 import 'package:flutter/material.dart';
 
 class Menu extends StatelessWidget  {
@@ -13,8 +14,9 @@ class Menu extends StatelessWidget  {
 
   @override
   Widget build(BuildContext context) {
-    return
-      // appBar: BaseAppBar(title: const Text('Buscador'), appBar: AppBar()),
+
+    if(GlobalData.type=='alumno'){
+      return 
        Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
@@ -27,7 +29,7 @@ class Menu extends StatelessWidget  {
               decoration: BoxDecoration(
                 color: Colors.grey,
               ),
-              child: Text('Menu')
+              child: Text('Menu Alumno')
              // child: Image(image: AssetImage('assets/images/logo.png') ),
 
             ),
@@ -49,6 +51,30 @@ class Menu extends StatelessWidget  {
 
               },
             ),
+            
+            
+          ],
+        )
+      );
+    }if(GlobalData.type=='bibliotecario'){
+      return 
+       Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.grey,
+              ),
+              child: Text('Menu Bibliotecario')
+             // child: Image(image: AssetImage('assets/images/logo.png') ),
+
+            ),
+        
              ListTile(
               title: const Text('lector Qr'),
               leading: Icon(Icons.qr_code_scanner),
@@ -95,6 +121,12 @@ class Menu extends StatelessWidget  {
             ),
           ],
         ));
+    }else{
+      return Drawer();
+    }
+    
+      // appBar: BaseAppBar(title: const Text('Buscador'), appBar: AppBar()),
+      
     
   }
 

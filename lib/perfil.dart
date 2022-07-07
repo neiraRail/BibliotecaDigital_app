@@ -12,6 +12,7 @@ class VistaPerfil extends StatefulWidget {
 
 class _VistaPerfilState extends State<VistaPerfil> {
   var idUsuario =GlobalData.idUser;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
