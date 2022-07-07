@@ -78,7 +78,6 @@ class _CargaLibrosState extends State<CargaLibros> {
       appBar: AppBar(
         title: const Text("Carga de libros"),
       ),
-      drawer: Menu( ),
       body: Column(children: [
         Expanded(
           child: Wrap(

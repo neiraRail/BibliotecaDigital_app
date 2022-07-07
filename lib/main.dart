@@ -44,10 +44,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: 'loginWeb',
       routes: {
-        'buscador': (context) => const VistaBuscador(),
         'navegador': ((context) => const VistaNavegador()),
-        'historial': ((context) => const VistaHistorial()),
-        'lector': (context) => const VistaLectorQR(),
         'loginWeb': (context) => const VistaLoginWeb(),
         'datos': (context) => const VistaDatosLibros(),
         'reserva': (context) => const VistaReservaQR(),

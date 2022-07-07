@@ -25,7 +25,7 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
   List<CopiaLibro>? copias;
   bool isDisponible = false;
   bool isLoaded = true;
-  var idUsuario =GlobalData.idUser;
+  var idUsuario = GlobalData.idUser;
   //Libro? libro;
 
   @override
@@ -53,7 +53,6 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
         title: const Text("Datos Libro"),
         appBar: AppBar(),
       ),
-      drawer: Menu( ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
         child: Container(
@@ -173,11 +172,11 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
                           ),
                           SizedBox(height: 15),
                           Visibility(
-
                             child: Align(
                               alignment: Alignment.center,
                               child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(primary: Colors.green),
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Colors.green),
                                   onPressed: () => reservar(libro!),
                                   child: const Text("Reservar Libro")),
                             ),
@@ -200,8 +199,8 @@ class _VistaDatosLibrosState extends State<VistaDatosLibros> {
 
   Future<void> reservar(Libro libro) async {
     mostrar_dialogo();
-    PostReserva postReserva =
-        PostReserva(idLibro: libro.idLibro!, duracionHoras: 5, idAlumno: idUsuario);
+    PostReserva postReserva = PostReserva(
+        idLibro: libro.idLibro!, duracionHoras: 5, idAlumno: idUsuario);
     Reserva? reserva = await ReservaService.postReserva(postReserva);
     if (reserva != null) {
       Navigator.pop(context);

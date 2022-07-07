@@ -25,9 +25,9 @@ class _BuscadorWebState extends State<BuscadorWeb> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BaseAppBar(
-          title: const Text('Buscador de libross'), appBar: AppBar()),
-      drawer: Menu( ),
+      appBar:
+          BaseAppBar(title: const Text('Buscador de libros'), appBar: AppBar()),
+      drawer: Menu(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
         child: Column(children: [
@@ -69,7 +69,8 @@ class _BuscadorWebState extends State<BuscadorWeb> {
                 itemCount: busqueda.length,
                 itemBuilder: (context, i) {
                   return GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, 'datos',
+                      onTap: () => Navigator.pushReplacementNamed(
+                          context, 'datos',
                           arguments: busqueda[i]),
                       child: LibroCard(
                         libro: busqueda[i],
