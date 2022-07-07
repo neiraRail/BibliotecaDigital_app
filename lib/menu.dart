@@ -94,7 +94,72 @@ class Menu extends StatelessWidget  {
               },
             ),
              ListTile(
-              title: const Text('Craga masiva'),
+              title: const Text('Carga masiva'),
+              leading: Icon(Icons.cloud_upload_outlined),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, 'carga');
+
+              },
+            ),
+              ListTile(
+              title: const Text('Historial de Pedidos'),
+              leading: Icon(Icons.history ),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, 'historialWeb');
+
+              },
+            ),  ListTile(
+              title: const Text('Buscador'),
+              leading: Icon(Icons.manage_search),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, 'buscadorWeb');
+
+              },
+            ),
+          ],
+        ));
+    }if(GlobalData.type=='bibliotecario'){
+      return 
+       Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.grey,
+              ),
+              child: Text('Menu Admin')
+             // child: Image(image: AssetImage('assets/images/logo.png') ),
+
+            ),
+        
+             ListTile(
+              title: const Text('lector Qr'),
+              leading: Icon(Icons.qr_code_scanner),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, 'lector');
+
+              },
+            ),
+             ListTile(
+              title: const Text('Agregar un libro'),
+              leading: Icon(Icons.fiber_new),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, 'subidaManual');
+
+              },
+            ),
+             ListTile(
+              title: const Text('Carga masiva'),
               leading: Icon(Icons.cloud_upload_outlined),
               onTap: () {
                 Navigator.pop(context);
