@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import '../modelo/globalData.dart';
 import '../modelo/postReserva.dart';
 import '../modelo/reserva.dart';
 
@@ -9,8 +10,8 @@ class ReservaService {
         "200.13.5.14:7102", "/api/prestamo/" + id.toString(), {'q': '{http}'});
 
     var response = await client.post(uri, headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
+      'Authorization': 'Bearer ' + GlobalData.token.toString(),
+      "Access-Control-Allow-Origin": "*"
     });
 
     if (response.statusCode == 200) {
@@ -25,7 +26,10 @@ class ReservaService {
     print("ID OCUPADA: " + idreserva.toString());
     var uri = Uri.http("200.13.5.14:7102",
         "/api/reserva/" + idreserva.toString(), {'q': '{http}'});
-    var response = await client.get(uri);
+    var response = await client.get(uri, headers: {
+      'Authorization': 'Bearer ' + GlobalData.token.toString(),
+      "Access-Control-Allow-Origin": "*"
+    });
     print(response.body);
     if (response.statusCode == 200) {
       var json = response.body;
@@ -39,7 +43,10 @@ class ReservaService {
 
     var uri = Uri.http(
         "200.13.5.14:7102", "/api/reserva/" + id.toString(), {'q': '{http}'});
-    var response = await client.get(uri);
+    var response = await client.get(uri, headers: {
+      'Authorization': 'Bearer ' + GlobalData.token.toString(),
+      "Access-Control-Allow-Origin": "*"
+    });
     if (response.statusCode == 200) {
       var json = response.body;
       return reservasFromJson(json);
@@ -53,8 +60,7 @@ class ReservaService {
     var uri = Uri.http("200.13.5.14:7102", "/api/reserva/", {'q': '{http}'});
     var response =
         await client.post(uri, body: postReservaToJson(postreserva), headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
+      'Authorization': 'Bearer ' + GlobalData.token.toString(),
       "Access-Control-Allow-Origin": "*"
     });
     if (response.statusCode == 200) {

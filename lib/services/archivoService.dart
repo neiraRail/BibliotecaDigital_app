@@ -1,3 +1,4 @@
+import 'package:bib_digitalapp/modelo/globalData.dart';
 import 'package:http/http.dart' as http;
 import 'package:cross_file/cross_file.dart';
 
@@ -9,6 +10,7 @@ class ArchivoService {
     var request = http.MultipartRequest('POST', uri);
     request.files.add(await http.MultipartFile.fromPath('file', file.path!));
     request.headers["Access-Control-Allow-Origin"] = "*";
+    request.headers["Authorization"] = "Bearer " + GlobalData.token;
     var res =
         await request.send().catchError((error) => throw Exception(error));
 

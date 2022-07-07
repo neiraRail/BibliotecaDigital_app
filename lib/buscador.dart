@@ -21,7 +21,7 @@ class VistaBuscador extends StatefulWidget {
 class _VistaBuscadorState extends State<VistaBuscador> {
   //bool filtro1 = false;
   //bool filtro2 = false;
-  
+
   //inicializar controller
 
   List<Libro>? busqueda = [];
@@ -36,18 +36,26 @@ class _VistaBuscadorState extends State<VistaBuscador> {
   }
 
   void buscarPalabra(palabra) async {
-    mostrarDialog();
-    var libros = await LibroService.buscarPalabra(palabra);
-    if (libros != null) {
-      busqueda = libros;
-      setState(() {});
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Hubo un error"),
+    try {
+      mostrarDialog();
+      var libros = await LibroService.buscarPalabra(palabra);
+      if (libros != null) {
+        busqueda = libros;
+        setState(() {});
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Hubo un error"),
+          backgroundColor: Colors.red,
+        ));
+      }
+      Navigator.pop(context);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Hubo un error: " + e.toString()),
         backgroundColor: Colors.red,
       ));
+      Navigator.pop(context);
     }
-    Navigator.pop(context);
   }
 
   void mostrarDialog() {
@@ -83,7 +91,7 @@ class _VistaBuscadorState extends State<VistaBuscador> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(title: const Text('Buscador'), appBar: AppBar()),
-      drawer: Menu( ),
+      drawer: Menu(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
         child: Column(
