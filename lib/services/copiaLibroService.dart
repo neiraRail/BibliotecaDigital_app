@@ -36,10 +36,29 @@ class CopiaLibroService {
       Iterable l = json.decode(response.body);
       List<CopiaLibro> copias =
           List<CopiaLibro>.from(l.map((model) => CopiaLibro.fromJson(model)));
-      print(copias[0].idEspecifico);
+
       return copias;
     } else {
       return [];
+    }
+  }
+
+  static Future<bool> deleteLibro(CopiaLibro libro) async {
+    var client = http.Client();
+    print("eliminar copia libro: " + libro.idEspecifico.toString());
+    var uri = Uri.http("200.13.5.14:7102",
+        "/api/copialibro/" + libro.idEspecifico.toString(), {'q': '{http}'});
+    var response = await client.delete(uri, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + GlobalData.token,
+    });
+
+    print(response.body);
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception(response.body);
     }
   }
 }

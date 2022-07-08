@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:bib_digitalapp/libro_card.dart';
+import 'package:bib_digitalapp/modelo/copiaLibro.dart';
+import 'package:bib_digitalapp/services/copiaLibroService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -69,8 +71,7 @@ class _BuscadorWebState extends State<BuscadorWeb> {
                 itemCount: busqueda.length,
                 itemBuilder: (context, i) {
                   return GestureDetector(
-                      onTap: () => Navigator.pushReplacementNamed(
-                          context, 'datos',
+                      onTap: () => Navigator.pushNamed(context, 'datos',
                           arguments: busqueda[i]),
                       child: LibroCard(
                         libro: busqueda[i],
@@ -89,7 +90,7 @@ class _BuscadorWebState extends State<BuscadorWeb> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              showDialogEliminar(busqueda[i]);
+                              mostrar_dialogo_copias(busqueda[i]);
                             },
                             child: const Text("Eliminar"),
                             style:
@@ -106,7 +107,59 @@ class _BuscadorWebState extends State<BuscadorWeb> {
     );
   }
 
-  void showDialogEliminar(Libro libro) {
+  void mostrar_dialogo_copias(Libro libro) async {
+    List<CopiaLibro> copias = await CopiaLibroService.buscarCopias(libro);
+    if (copias.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("No hay ejemplares de este libro"),
+        backgroundColor: Colors.red,
+      ));
+    } else {
+      showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+                title: Text.rich(
+                  TextSpan(children: [
+                    const TextSpan(text: "Ejemplares de "),
+                    TextSpan(
+                        text: libro.titulo,
+                        style: const TextStyle(fontWeight: FontWeight.bold)),
+                    const TextSpan(text: ": ")
+                  ]),
+                ),
+                content: SizedBox(
+                  width: 300,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: copias.length,
+                      itemBuilder: (context, i) {
+                        return GestureDetector(
+                          onTap: (() => Navigator.pushReplacementNamed(
+                              context, 'reserva')),
+                          child: ListTile(
+                            title: Text(
+                                "copia " + copias[i].idEspecifico.toString()),
+                            subtitle: Text("Estado: " + copias[i].estado),
+                            trailing: IconButton(
+                                onPressed: () {
+                                  showDialogEliminar(copias[i]);
+                                },
+                                icon: const Icon(Icons.delete)),
+                            tileColor: Colors.grey[300],
+                            hoverColor: Colors.grey,
+                            shape: const RoundedRectangleBorder(
+                              side: BorderSide(color: Colors.grey, width: 1),
+                            ),
+                          ),
+                        );
+                      }),
+                ),
+              ),
+          barrierDismissible: true);
+    }
+  }
+
+  void showDialogEliminar(CopiaLibro libro) {
     showDialog(
       // The user CANNOT close this dialog  by pressing outsite it
       barrierDismissible: true,
@@ -157,22 +210,32 @@ class _BuscadorWebState extends State<BuscadorWeb> {
     );
   }
 
-  void eliminarLibro(Libro libro) async {
+  void eliminarLibro(CopiaLibro libro) async {
     mostrarDialog();
-    var response = await LibroService.deleteLibro(libro);
-    if (response == true) {
+    try {
+      var response = await CopiaLibroService.deleteLibro(libro);
+      if (response == true) {
+        Navigator.pop(context);
+        mostrarDialogExito(libro.libro);
+      } else {
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Hubo un error"),
+          backgroundColor: Colors.red,
+        ));
+      }
+    } catch (e) {
       Navigator.pop(context);
-      mostrarDialogExito();
-    } else {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Hubo un error"),
+        content: Text(
+            "Hubo un error: No se puede eliminar esta copia pues está asociada a prestamos activos o anteriores"),
         backgroundColor: Colors.red,
       ));
     }
   }
 
-  void mostrarDialogExito() {
+  void mostrarDialogExito(Libro libro) {
     showDialog(
         // The user CANNOT close this dialog  by pressing outsite it
         barrierDismissible: false,
@@ -200,7 +263,9 @@ class _BuscadorWebState extends State<BuscadorWeb> {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.green),
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.pop(context); //Quitar dialogo exito
+                          Navigator.pop(context); //Quitar dialogo copias
+                          mostrar_dialogo_copias(libro);
                           buscarPalabra(busquedaController.text);
                         },
                         child: const Text('Aceptar')),
