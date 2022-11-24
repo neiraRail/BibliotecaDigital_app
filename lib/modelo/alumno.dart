@@ -4,10 +4,10 @@
 
 import 'dart:convert';
 
-List<Alumno> alumnoFromJson(String str) =>
+List<Alumno> alumnosFromJson(String str) =>
     List<Alumno>.from(json.decode(str).map((x) => Alumno.fromJson(x)));
 
-Alumno aalumnoFromJson(String str){
+Alumno alumnoFromJson(String str){
 
   return Alumno.fromJson(jsonDecode(str));
 }
